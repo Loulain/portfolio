@@ -44,7 +44,7 @@
         <span class="tag">Design System</span>
       </div>
       <h1>建構品牌元件庫</h1>
-      <p>為品牌打造一套統一、可擴展的設計元件系統，確保產品在各平台上的一致性與開發效率。</p>
+      <p>為小雞上工打造一套統一、可擴展的設計元件系統，解決設計債問題，提升跨職能協作效率。</p>
     </div>
   </section>
 
@@ -53,24 +53,162 @@
     <div class="container">
 
       <div class="image-block">
-        <img src="../images/project-1-cover.jpg" alt="品牌元件庫封面">
+        <span class="image-block__placeholder">專案封面圖</span>
       </div>
 
+      <!-- 專案背景 -->
       <h2>專案背景</h2>
-      <p>隨著產品線擴張，團隊面臨設計語言不一致的問題。各產品的色彩、元件樣式、互動行為各自為政，導致使用者體驗碎片化，開發成本也隨之增加。</p>
+      <p>在產品初期階段，小雞上工為了能快速佔據打工市場的龍頭地位，團隊的首要任務是開發核心功能並於上線後快速迭代。過去的設計師為了能跟上產品的迭代週期，將大部分的心力放在創建新功能上，由於當時沒有明確的設計規範，導致衍生了許多設計債，例如明明是相同的元件在不同的頁面卻有著各式各樣的差異，間接導致了工程師的開發困難與設計師之間的協作效率低落等問題。</p>
+      <p>在產品逐漸成熟後，這種沒有統一規範的狀況已經開始影響到工作與產品體驗，故我與設計團隊跟主管溝通後決定開始為期半年的元件庫建構計畫。</p>
 
-      <h2>我的角色</h2>
-      <p>主導元件庫的規劃、設計與文件撰寫。與前端工程師密切合作，確保設計稿能被精確實現，同時制定元件的使用規範與命名原則。</p>
+      <!-- 目標用戶 -->
+      <h2>目標用戶</h2>
+      <p>計畫開始前，我決定先了解團隊成員對於這項計劃的期待，一方面是希望我們努力的方向是正確的，二來是讓團隊成員能夠參與其中。我問了專案中最重要的三個關係人，他們期待的元件庫是什麼樣子：</p>
+
+      <div class="stakeholder-grid">
+        <div class="stakeholder-card">
+          <div class="stakeholder-card__icon">APP</div>
+          <div class="stakeholder-card__role">APP 設計師</div>
+          <p class="stakeholder-card__quote">希望不同的裝置下元件樣式能統一。</p>
+        </div>
+        <div class="stakeholder-card">
+          <div class="stakeholder-card__icon">DEV</div>
+          <div class="stakeholder-card__role">工程師</div>
+          <p class="stakeholder-card__quote">希望元件能夠重複使用，並且能知道元件的所有狀態。</p>
+        </div>
+        <div class="stakeholder-card">
+          <div class="stakeholder-card__icon">PM</div>
+          <div class="stakeholder-card__role">專案經理</div>
+          <p class="stakeholder-card__quote">希望能清楚告知元件如何使用及何時使用。</p>
+        </div>
+      </div>
+
+      <!-- 流程 -->
+      <h2>流程</h2>
+
+      <!-- 1. 研究規範 -->
+      <h3>1. 研究規範</h3>
+      <p>首先我參考了 <strong>Atlassian、Ant Design、Material Design</strong> 等成熟系統，發現大部分的元件庫主要分為三個部分：</p>
+      <ol>
+        <li>元件狀態（包含不同狀態）</li>
+        <li>元件規範（規範如何使用或何時使用）</li>
+        <li>使用範例（實際在產品中的畫面）</li>
+      </ol>
+      <p>考量時間的關係，最後我選擇了元件狀態與元件規範（已經能滿足關係人的期待）。</p>
+      <ul>
+        <li><strong>行動：</strong>比較各家元件庫的資訊層級，分析他們如何分類元件與區分狀態。</li>
+        <li><strong>產出：</strong>整理一份元件表單，確保哪些高頻率使用的元件（例如：按鈕）需要優先被標準化，最後我與設計團隊共同討論出 34 個元件需要整理。</li>
+      </ul>
 
       <div class="image-block">
-        <img src="../images/project-1-detail.jpg" alt="元件庫細節">
+        <span class="image-block__placeholder">參考過的品牌 Logo</span>
       </div>
 
-      <h2>設計過程</h2>
-      <p>從基礎的色彩系統、字型級距、間距規範開始，逐步建構出按鈕、輸入框、卡片、彈窗等核心元件。每個元件都包含多種狀態與變體，並附上清晰的使用指南。</p>
+      <div class="image-block">
+        <span class="image-block__placeholder">元件盤點表格截圖</span>
+      </div>
 
-      <h2>成果</h2>
-      <p>元件庫上線後，設計交付時間縮短了約 40%，跨產品的視覺一致性大幅提升。目前已被團隊內三個產品線採用。</p>
+      <!-- 2. 全面盤點 -->
+      <h3>2. 全面盤點</h3>
+      <p>接著我針對這 34 個元件，開始進行盤點，目標是盡可能收集到所有已開發的元件。方法有截圖畫面、詢問工程師以及查找過去的稿件。這個過程對於我之後在撰寫元件規範，有著非常大的幫助，能夠更清楚這些元件在開發實際的樣子。</p>
+
+      <!-- 3. 定義架構與命名規範 -->
+      <h3>3. 定義架構與命名規範</h3>
+      <p>收集了大量的資料後，我將所有元件進行整合，整合的方向分為以下幾種：</p>
+
+      <p><strong>樣式上的整合：</strong>相同的元件有著相同的樣式。</p>
+      <div class="image-block">
+        <span class="image-block__placeholder">樣式整合 Before / After</span>
+      </div>
+
+      <p><strong>命名上的整合：</strong>相同的元件有著相同的命名，並建立一套能直接對應到工程師能使用的 Design Tokens。</p>
+      <div class="image-block">
+        <span class="image-block__placeholder">命名整合 Before / After</span>
+      </div>
+
+      <p><strong>邏輯上的整合：</strong>統一元件的動畫時間、運動方向、狀態變化等等。</p>
+      <div class="image-block">
+        <span class="image-block__placeholder">邏輯整合 Before / After</span>
+      </div>
+
+      <!-- 4. 分階段導入 -->
+      <h3>4. 分階段導入</h3>
+      <p>花了將近半年後，終於可以將新的規範套用在產品上了，我與團隊的共識是希望在不影響既有的功能上，滾動式調整原有的畫面。一方面是避免大規模的更動導致大量的 BUG 出現，一方面也是因為團隊手邊還有許多更重要的專案要進行。所以我們採取大包小的策略：一個主要專案＋優化既有的元件。</p>
+
+      <div class="image-block">
+        <span class="image-block__placeholder">大包小策略示意圖</span>
+      </div>
+
+      <!-- 5. 持續迭代 -->
+      <h3>5. 持續迭代</h3>
+      <p>最後我們也建立了一套後續迭代的流程，避免再度累積可怕的設計債，透過流程也能讓團隊成員清楚知道現在元件處於哪個階段。</p>
+
+      <div class="process-flow">
+        <div class="process-step">
+          <div class="process-step__num">1</div>
+          <p class="process-step__text">發現既有元件無法滿足需求，或原有元件需要修改</p>
+        </div>
+        <div class="process-step">
+          <div class="process-step__num">2</div>
+          <p class="process-step__text">設計師與工程師共同評估：創建全新元件或擴充現有元件</p>
+        </div>
+        <div class="process-step">
+          <div class="process-step__num">3</div>
+          <p class="process-step__text">專案上線後，立即更新元件庫並同步於群組通知成員</p>
+        </div>
+      </div>
+
+      <hr>
+
+      <!-- 挑戰 -->
+      <h2>挑戰</h2>
+
+      <div class="challenge-block">
+        <div class="challenge-block__label">Challenge 1</div>
+        <p class="challenge-block__title">元件散落各處且數量龐大</p>
+        <p class="challenge-block__desc">由於元件沒有一套完整的使用規範，使得過往專案的元件充斥各式各樣的設定，有的大有的小，數量還非常的多。</p>
+      </div>
+      <div class="challenge-block">
+        <div class="challenge-block__label">Solution</div>
+        <p class="challenge-block__desc">使用插件與 AI 工具來加速重複性高的工作。</p>
+      </div>
+
+      <div class="challenge-pair"></div>
+      <div class="challenge-block">
+        <div class="challenge-block__label">Challenge 2</div>
+        <p class="challenge-block__title">舊有邏輯難以撼動</p>
+        <p class="challenge-block__desc">部分元件的背後可能涉及複雜的工程邏輯，若擅自更動可能會造成工程師開發上的困難。</p>
+      </div>
+      <div class="challenge-block">
+        <div class="challenge-block__label">Solution</div>
+        <p class="challenge-block__desc">討價還價，就算無法完全更動，也盡可能討論出兩方都能接受的折衷辦法，在堅守設計原則下也要尊重工程師的想法。</p>
+      </div>
+
+      <hr>
+
+      <!-- 專案成果 -->
+      <h2>專案成果</h2>
+
+      <div class="results-grid">
+        <div class="result-stat">
+          <div class="result-stat__number">-50%</div>
+          <p class="result-stat__text">設計時間減少，小型專案從 2 天縮短至 1 天</p>
+        </div>
+        <div class="result-stat">
+          <div class="result-stat__number">-50%</div>
+          <p class="result-stat__text">工程 Bug 數量減少，因狀態缺漏導致的修復時間下降</p>
+        </div>
+        <div class="result-stat">
+          <div class="result-stat__number">-50%</div>
+          <p class="result-stat__text">PM 驗收次數減少，平均過稿從 2 次以上降至 1 次</p>
+        </div>
+      </div>
+
+      <hr>
+
+      <!-- 反思 -->
+      <h2>反思</h2>
+      <p>這個過程讓我大量閱讀了很多大公司的設計規範，然後再回頭去對照我們自己產品的技術限制。這讓我對每個元件的使用原則都有了更扎實的理解，不再只是單純畫圖，而是知道如何把設計變成一套可以被大家共同使用的標準。</p>
 
       <!-- Project Nav -->
       <nav class="project-nav">

@@ -40,8 +40,9 @@
   <!-- Hero -->
   <section class="hero">
     <div class="container">
-      <p class="hero__label">Hi, 我是 LOU</p>
-      <h1 class="hero__title">Product Designer</h1>
+      <p class="hero__label">Hi, 我是產品設計師</p>
+      <h1 class="hero__title">LOU
+      </h1>
       <p class="hero__desc">專注於使用者體驗與介面設計，將複雜需求轉化為簡潔直覺的數位產品。</p>
     </div>
   </section>
@@ -54,7 +55,7 @@
 
         <a href="works/project-1.html" class="project-card">
           <div class="project-card__thumb">
-            <img src="images/project-1-thumb.jpg" alt="建構品牌元件庫">
+            <span class="thumb__placeholder">Thumbnail</span>
           </div>
           <div class="project-card__body">
             <div class="project-card__tags">
@@ -66,7 +67,7 @@
 
         <a href="works/project-2.html" class="project-card">
           <div class="project-card__thumb">
-            <img src="images/project-2-thumb.jpg" alt="人才評價">
+            <span class="thumb__placeholder">Thumbnail</span>
           </div>
           <div class="project-card__body">
             <div class="project-card__tags">
@@ -79,7 +80,7 @@
 
         <a href="works/project-3.html" class="project-card">
           <div class="project-card__thumb">
-            <img src="images/project-3-thumb.jpg" alt="金啾獎">
+            <span class="thumb__placeholder">Thumbnail</span>
           </div>
           <div class="project-card__body">
             <div class="project-card__tags">
@@ -91,7 +92,7 @@
 
         <a href="works/project-4.html" class="project-card">
           <div class="project-card__thumb">
-            <img src="images/project-4-thumb.jpg" alt="刊登收費">
+            <span class="thumb__placeholder">Thumbnail</span>
           </div>
           <div class="project-card__body">
             <div class="project-card__tags">
@@ -106,23 +107,28 @@
   </section>
 
   <!-- Contact -->
-  <section class="section" id="contact">
+  <section class="section contact-section" id="contact">
     <div class="container">
-      <h2 class="section-title">Contact</h2>
+      <div class="contact-header">
+        <h2>你在找產品設計師嗎？</h2>
+        <p>歡迎與我聯絡</p>
+      </div>
       <form class="contact-form" action="#" method="post">
-        <div class="form-group">
-          <label for="name">姓名</label>
-          <input type="text" id="name" name="name" placeholder="請輸入您的姓名" required>
+        <div class="contact-form__row">
+          <div class="form-group">
+            <label for="name">姓名</label>
+            <input type="text" id="name" name="name" placeholder="王大明" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="abcd@gmail.com" required>
+          </div>
         </div>
         <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" placeholder="請輸入您的 Email" required>
+          <label for="message">內容</label>
+          <textarea id="message" name="message" placeholder="請輸入你的訊息" required></textarea>
         </div>
-        <div class="form-group">
-          <label for="message">訊息</label>
-          <textarea id="message" name="message" placeholder="請輸入訊息內容" required></textarea>
-        </div>
-        <button type="submit" class="btn">送出訊息</button>
+        <button type="submit" class="btn btn--full">送出</button>
       </form>
     </div>
   </section>
