@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>建構品牌元件庫 — LOU</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="../index.html" class="navbar__logo">LOU</a>
+      <button class="navbar__hamburger" aria-label="Toggle menu" onclick="document.querySelector('.navbar__links').classList.toggle('open')">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="navbar__links">
+        <li><a href="../index.html">Home</a></li>
+        <li class="navbar__dropdown">
+          <a href="#" class="active">Work</a>
+          <ul class="navbar__dropdown-menu">
+            <li><a href="project-1.html">建構品牌元件庫</a></li>
+            <li><a href="project-2.html">人才評價</a></li>
+            <li><a href="project-3.html">金啾獎</a></li>
+            <li><a href="project-4.html">刊登收費</a></li>
+          </ul>
+        </li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Project Hero -->
+  <section class="project-hero">
+    <div class="container">
+      <div class="project-hero__tags">
+        <span class="tag">Design System</span>
+      </div>
+      <h1>建構品牌元件庫</h1>
+      <p>為品牌打造一套統一、可擴展的設計元件系統，確保產品在各平台上的一致性與開發效率。</p>
+    </div>
+  </section>
+
+  <!-- Project Content -->
+  <section class="project-content">
+    <div class="container">
+
+      <div class="image-block">
+        <img src="../images/project-1-cover.jpg" alt="品牌元件庫封面">
+      </div>
+
+      <h2>專案背景</h2>
+      <p>隨著產品線擴張，團隊面臨設計語言不一致的問題。各產品的色彩、元件樣式、互動行為各自為政，導致使用者體驗碎片化，開發成本也隨之增加。</p>
+
+      <h2>我的角色</h2>
+      <p>主導元件庫的規劃、設計與文件撰寫。與前端工程師密切合作，確保設計稿能被精確實現，同時制定元件的使用規範與命名原則。</p>
+
+      <div class="image-block">
+        <img src="../images/project-1-detail.jpg" alt="元件庫細節">
+      </div>
+
+      <h2>設計過程</h2>
+      <p>從基礎的色彩系統、字型級距、間距規範開始，逐步建構出按鈕、輸入框、卡片、彈窗等核心元件。每個元件都包含多種狀態與變體，並附上清晰的使用指南。</p>
+
+      <h2>成果</h2>
+      <p>元件庫上線後，設計交付時間縮短了約 40%，跨產品的視覺一致性大幅提升。目前已被團隊內三個產品線採用。</p>
+
+      <!-- Project Nav -->
+      <nav class="project-nav">
+        <span></span>
+        <a href="project-2.html">下一個專案 &rarr;</a>
+      </nav>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 LOU. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

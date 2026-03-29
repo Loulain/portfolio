@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LOU — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar__logo">LOU</a>
+      <button class="navbar__hamburger" aria-label="Toggle menu" onclick="document.querySelector('.navbar__links').classList.toggle('open')">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="navbar__links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li class="navbar__dropdown">
+          <a href="#">Work</a>
+          <ul class="navbar__dropdown-menu">
+            <li><a href="works/project-1.html">建構品牌元件庫</a></li>
+            <li><a href="works/project-2.html">人才評價</a></li>
+            <li><a href="works/project-3.html">金啾獎</a></li>
+            <li><a href="works/project-4.html">刊登收費</a></li>
+          </ul>
+        </li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <p class="hero__label">Hi, 我是 LOU</p>
+      <h1 class="hero__title">Product Designer</h1>
+      <p class="hero__desc">專注於使用者體驗與介面設計，將複雜需求轉化為簡潔直覺的數位產品。</p>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Selected Work</h2>
+      <div class="projects-grid">
+
+        <a href="works/project-1.html" class="project-card">
+          <div class="project-card__thumb">
+            <img src="images/project-1-thumb.jpg" alt="建構品牌元件庫">
+          </div>
+          <div class="project-card__body">
+            <div class="project-card__tags">
+              <span class="tag">Design System</span>
+            </div>
+            <h3 class="project-card__title">建構品牌元件庫</h3>
+          </div>
+        </a>
+
+        <a href="works/project-2.html" class="project-card">
+          <div class="project-card__thumb">
+            <img src="images/project-2-thumb.jpg" alt="人才評價">
+          </div>
+          <div class="project-card__body">
+            <div class="project-card__tags">
+              <span class="tag">Web</span>
+              <span class="tag">App</span>
+            </div>
+            <h3 class="project-card__title">人才評價</h3>
+          </div>
+        </a>
+
+        <a href="works/project-3.html" class="project-card">
+          <div class="project-card__thumb">
+            <img src="images/project-3-thumb.jpg" alt="金啾獎">
+          </div>
+          <div class="project-card__body">
+            <div class="project-card__tags">
+              <span class="tag">Web</span>
+            </div>
+            <h3 class="project-card__title">金啾獎</h3>
+          </div>
+        </a>
+
+        <a href="works/project-4.html" class="project-card">
+          <div class="project-card__thumb">
+            <img src="images/project-4-thumb.jpg" alt="刊登收費">
+          </div>
+          <div class="project-card__body">
+            <div class="project-card__tags">
+              <span class="tag">Web</span>
+            </div>
+            <h3 class="project-card__title">刊登收費</h3>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section" id="contact">
+    <div class="container">
+      <h2 class="section-title">Contact</h2>
+      <form class="contact-form" action="#" method="post">
+        <div class="form-group">
+          <label for="name">姓名</label>
+          <input type="text" id="name" name="name" placeholder="請輸入您的姓名" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="請輸入您的 Email" required>
+        </div>
+        <div class="form-group">
+          <label for="message">訊息</label>
+          <textarea id="message" name="message" placeholder="請輸入訊息內容" required></textarea>
+        </div>
+        <button type="submit" class="btn">送出訊息</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 LOU. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — LOU</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar__logo">LOU</a>
+      <button class="navbar__hamburger" aria-label="Toggle menu" onclick="document.querySelector('.navbar__links').classList.toggle('open')">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="navbar__links">
+        <li><a href="index.html">Home</a></li>
+        <li class="navbar__dropdown">
+          <a href="#">Work</a>
+          <ul class="navbar__dropdown-menu">
+            <li><a href="works/project-1.html">建構品牌元件庫</a></li>
+            <li><a href="works/project-2.html">人才評價</a></li>
+            <li><a href="works/project-3.html">金啾獎</a></li>
+            <li><a href="works/project-4.html">刊登收費</a></li>
+          </ul>
+        </li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- About Hero -->
+  <section class="about-hero">
+    <div class="container">
+      <h1>About Me</h1>
+      <p>對設計充滿熱忱，專注於打造清晰、直覺且具有意義的數位體驗。相信好的設計來自於對使用者的深入理解與對細節的堅持。</p>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Experience</h2>
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="timeline-item__date">2024 - 至今</div>
+          <div class="timeline-item__role">Senior UI/UX Designer</div>
+          <div class="timeline-item__company">某科技公司</div>
+          <p class="timeline-item__desc">負責產品的使用者體驗設計與設計系統建構，主導多項核心功能的介面設計與優化。</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-item__date">2022 - 2024</div>
+          <div class="timeline-item__role">UI/UX Designer</div>
+          <div class="timeline-item__company">某新創公司</div>
+          <p class="timeline-item__desc">參與產品從零到一的設計過程，包含使用者研究、線框稿、視覺設計到交付開發。</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-item__date">2020 - 2022</div>
+          <div class="timeline-item__role">Junior Designer</div>
+          <div class="timeline-item__company">某設計工作室</div>
+          <p class="timeline-item__desc">協助執行品牌視覺設計與網站介面設計專案，累積紮實的視覺設計基礎。</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section" id="contact">
+    <div class="container">
+      <h2 class="section-title">Contact</h2>
+      <form class="contact-form" action="#" method="post">
+        <div class="form-group">
+          <label for="name">姓名</label>
+          <input type="text" id="name" name="name" placeholder="請輸入您的姓名" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="請輸入您的 Email" required>
+        </div>
+        <div class="form-group">
+          <label for="message">訊息</label>
+          <textarea id="message" name="message" placeholder="請輸入訊息內容" required></textarea>
+        </div>
+        <button type="submit" class="btn">送出訊息</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 LOU. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

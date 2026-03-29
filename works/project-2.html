@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>人才評價 — LOU</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="../index.html" class="navbar__logo">LOU</a>
+      <button class="navbar__hamburger" aria-label="Toggle menu" onclick="document.querySelector('.navbar__links').classList.toggle('open')">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="navbar__links">
+        <li><a href="../index.html">Home</a></li>
+        <li class="navbar__dropdown">
+          <a href="#" class="active">Work</a>
+          <ul class="navbar__dropdown-menu">
+            <li><a href="project-1.html">建構品牌元件庫</a></li>
+            <li><a href="project-2.html">人才評價</a></li>
+            <li><a href="project-3.html">金啾獎</a></li>
+            <li><a href="project-4.html">刊登收費</a></li>
+          </ul>
+        </li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Project Hero -->
+  <section class="project-hero">
+    <div class="container">
+      <div class="project-hero__tags">
+        <span class="tag">Web</span>
+        <span class="tag">App</span>
+      </div>
+      <h1>人才評價</h1>
+      <p>為企業打造跨平台的人才評估系統，涵蓋 Web 管理後台與 App 端的受試者介面，提供完整的測驗流程體驗。</p>
+    </div>
+  </section>
+
+  <!-- Project Content -->
+  <section class="project-content">
+    <div class="container">
+
+      <div class="image-block">
+        <img src="../images/project-2-cover.jpg" alt="人才評價封面">
+      </div>
+
+      <h2>專案背景</h2>
+      <p>客戶需要一套數位化的人才評估解決方案，取代傳統紙本測驗。系統需同時支援管理者在 Web 端建立與管理評測，以及受試者在 App 端完成作答。</p>
+
+      <h2>我的角色</h2>
+      <p>負責 Web 與 App 雙端的 UX 流程設計與 UI 視覺設計。從需求訪談、競品分析到原型測試，完整參與設計流程。</p>
+
+      <div class="image-block">
+        <img src="../images/project-2-detail.jpg" alt="人才評價細節">
+      </div>
+
+      <h2>設計挑戰</h2>
+      <p>最大的挑戰在於如何讓複雜的評測設定流程變得直覺易用，同時確保 App 端的作答體驗流暢，降低受試者的認知負擔。</p>
+
+      <h2>成果</h2>
+      <p>系統上線後受試者完成率提升至 92%，管理端的評測建立時間從平均 30 分鐘縮短至 10 分鐘以內。</p>
+
+      <!-- Project Nav -->
+      <nav class="project-nav">
+        <a href="project-1.html">&larr; 上一個專案</a>
+        <a href="project-3.html">下一個專案 &rarr;</a>
+      </nav>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 LOU. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
