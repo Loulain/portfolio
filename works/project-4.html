@@ -50,26 +50,37 @@
 
   <!-- Project Content -->
   <section class="project-content">
+
+    <!-- Fixed TOC -->
+    <aside class="toc" aria-label="目錄">
+      <ul class="toc__list">
+        <li><a href="#background">專案背景</a></li>
+        <li><a href="#role">我的角色</a></li>
+        <li><a href="#strategy">設計策略</a></li>
+        <li><a href="#results">成果</a></li>
+      </ul>
+    </aside>
+
     <div class="container">
 
       <div class="image-block">
         <span class="image-block__placeholder">專案封面圖</span>
       </div>
 
-      <h2>專案背景</h2>
+      <h2 id="background">專案背景</h2>
       <p>原有的刊登收費流程複雜且不直覺，使用者經常在付費環節流失。團隊決定重新設計整個收費體驗，以提升轉換率並降低客服負擔。</p>
 
-      <h2>我的角色</h2>
+      <h2 id="role">我的角色</h2>
       <p>主導收費流程的 UX 改版設計，從資料分析、使用者訪談到方案設計與 A/B 測試，全程參與並推動設計決策。</p>
 
       <div class="image-block">
         <span class="image-block__placeholder">設計細節展示</span>
       </div>
 
-      <h2>設計策略</h2>
+      <h2 id="strategy">設計策略</h2>
       <p>將原本五步驟的收費流程精簡為三步驟，重新設計方案比較頁面，以視覺化的方式呈現不同方案的差異，降低使用者的決策成本。</p>
 
-      <h2>成果</h2>
+      <h2 id="results">成果</h2>
       <p>改版上線後付費轉換率提升 35%，相關客服工單減少 50%。新的收費頁面也成為後續其他產品線的設計參考。</p>
 
       <!-- Project Nav -->
@@ -87,6 +98,34 @@
       <p>&copy; 2026 LOU. All rights reserved.</p>
     </div>
   </footer>
+
+  <script>
+    (function () {
+      var headings = Array.from(document.querySelectorAll('.project-content h2[id]'));
+      var tocLinks = document.querySelectorAll('.toc__list a');
+      if (!headings.length || !tocLinks.length) return;
+
+      function setActive(id) {
+        tocLinks.forEach(function (a) { a.classList.remove('is-active'); });
+        var link = document.querySelector('.toc__list a[href="#' + id + '"]');
+        if (link) link.classList.add('is-active');
+      }
+
+      setActive(headings[0].id);
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            setActive(entry.target.id);
+          } else if (entry.boundingClientRect.top < 0) {
+            setActive(entry.target.id);
+          }
+        });
+      }, { rootMargin: '-88px 0px -55% 0px' });
+
+      headings.forEach(function (h) { observer.observe(h); });
+    })();
+  </script>
 
 </body>
 </html>

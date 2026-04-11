@@ -44,104 +44,121 @@
         <span class="tag">Design System</span>
       </div>
       <h1>建構品牌元件庫</h1>
-      <p>為小雞上工打造一套統一、可擴展的設計元件系統，解決設計債問題，提升跨職能協作效率。</p>
+      <p>主導 Web 端元件庫的盤點、整理與導入，半年內以「大包小」策略系統性解決設計債，將設計時間、Bug 數與過稿次數各降低約 50%。</p>
     </div>
   </section>
 
   <!-- Project Content -->
   <section class="project-content">
+
+    <!-- Fixed TOC -->
+    <aside class="toc" aria-label="目錄">
+      <ul class="toc__list">
+        <li><a href="#background">背景與問題</a></li>
+        <li><a href="#role">我的角色與貢獻</a></li>
+        <li><a href="#process">設計過程</a></li>
+        <li><a href="#results">成果</a></li>
+        <li><a href="#reflection">反思</a></li>
+      </ul>
+    </aside>
+
     <div class="container">
 
       <div class="image-block">
         <span class="image-block__placeholder">專案封面圖</span>
       </div>
 
-      <!-- 專案背景 -->
-      <h2>專案背景</h2>
-      <p>在產品初期階段，小雞上工為了能快速佔據打工市場的龍頭地位，團隊的首要任務是開發核心功能並於上線後快速迭代。過去的設計師為了能跟上產品的迭代週期，將大部分的心力放在創建新功能上，由於當時沒有明確的設計規範，導致衍生了許多設計債，例如明明是相同的元件在不同的頁面卻有著各式各樣的差異，間接導致了工程師的開發困難與設計師之間的協作效率低落等問題。</p>
-      <p>在產品逐漸成熟後，這種沒有統一規範的狀況已經開始影響到工作與產品體驗，故我與設計團隊跟主管溝通後決定開始為期半年的元件庫建構計畫。</p>
+      <!-- 基本資訊 -->
+      <h2 id="background">背景與問題</h2>
+      <p>產品在快速迭代的早期階段，累積了大量沒有統一規範的設計債——同一個元件在不同頁面有不同的樣式、命名混亂、狀態缺漏，工程師很難直接套用，每次開發都需要大量的溝通確認。</p>
+      <p>這個問題由工程師主動反映給我，讓我意識到這不只是設計品質的問題，而是在影響整個團隊的開發效率。我決定主動將「元件庫優化」提案為團隊 OKR，爭取半年的時間維度來系統性地解決這個問題。</p>
+      <p>我與另一位 App 設計師分工合作，我全程負責 Web 端元件庫的盤點、整理與導入。</p>
 
-      <!-- 目標用戶 -->
-      <h2>目標用戶</h2>
-      <p>計畫開始前，我決定先了解團隊成員對於這項計劃的期待，一方面是希望我們努力的方向是正確的，二來是讓團隊成員能夠參與其中。我問了專案中最重要的三個關係人，他們期待的元件庫是什麼樣子：</p>
+      <div class="image-block">
+        <span class="image-block__placeholder">元件庫優化前的混亂狀態截圖</span>
+      </div>
+
+      <!-- 我的角色與貢獻 -->
+      <h2 id="role">我的角色與貢獻</h2>
+      <p>這個計畫從提案、規劃到執行都由我主導推動，具體包含：</p>
+      <ul>
+        <li>識別工程師痛點，主動提案並將此列入團隊 OKR</li>
+        <li>研究 Atlassian、Ant Design、Material Design 等成熟設計系統，定義本次優化範疇</li>
+        <li>盤點並整理 34 個高頻元件，建立統一的樣式、命名與邏輯規範</li>
+        <li>制定 Design Token 命名架構，確保設計端與工程端能直接對應</li>
+        <li>規劃「大包小」的分階段導入策略，在不影響既有功能的前提下滾動式更新</li>
+        <li>建立元件迭代流程，避免日後再度累積設計債</li>
+      </ul>
+
+      <!-- 設計過程 -->
+      <h2 id="process">設計過程</h2>
+
+      <!-- 1. 釐清需求 -->
+      <h3>1. 釐清需求，縮小範疇</h3>
+      <p>在動手之前，我先訪談了三個最重要的關係人——App 設計師、工程師、PM——了解他們各自對元件庫的期待。整理後發現三方的需求分別落在：<strong>樣式統一、狀態完整、使用說明清楚</strong>。</p>
 
       <div class="stakeholder-grid">
         <div class="stakeholder-card">
           <div class="stakeholder-card__icon">APP</div>
           <div class="stakeholder-card__role">APP 設計師</div>
-          <p class="stakeholder-card__quote">希望不同的裝置下元件樣式能統一。</p>
+          <p class="stakeholder-card__quote">希望不同裝置下元件樣式能統一。</p>
         </div>
         <div class="stakeholder-card">
           <div class="stakeholder-card__icon">DEV</div>
           <div class="stakeholder-card__role">工程師</div>
-          <p class="stakeholder-card__quote">希望元件能夠重複使用，並且能知道元件的所有狀態。</p>
+          <p class="stakeholder-card__quote">希望元件能重複使用，並能掌握所有狀態。</p>
         </div>
         <div class="stakeholder-card">
           <div class="stakeholder-card__icon">PM</div>
           <div class="stakeholder-card__role">專案經理</div>
-          <p class="stakeholder-card__quote">希望能清楚告知元件如何使用及何時使用。</p>
+          <p class="stakeholder-card__quote">希望能清楚知道元件如何使用、何時使用。</p>
         </div>
       </div>
 
-      <!-- 流程 -->
-      <h2>流程</h2>
-
-      <!-- 1. 研究規範 -->
-      <h3>1. 研究規範</h3>
-      <p>首先我參考了 <strong>Atlassian、Ant Design、Material Design</strong> 等成熟系統，發現大部分的元件庫主要分為三個部分：</p>
-      <ol>
-        <li>元件狀態（包含不同狀態）</li>
-        <li>元件規範（規範如何使用或何時使用）</li>
-        <li>使用範例（實際在產品中的畫面）</li>
-      </ol>
-      <p>考量時間的關係，最後我選擇了元件狀態與元件規範（已經能滿足關係人的期待）。</p>
-      <ul>
-        <li><strong>行動：</strong>比較各家元件庫的資訊層級，分析他們如何分類元件與區分狀態。</li>
-        <li><strong>產出：</strong>整理一份元件表單，確保哪些高頻率使用的元件（例如：按鈕）需要優先被標準化，最後我與設計團隊共同討論出 34 個元件需要整理。</li>
-      </ul>
+      <p>我參考多個成熟設計系統後，發現大多數元件庫涵蓋三個部分：元件狀態、元件規範、使用範例。考量到團隊當下的資源與時程，我判斷「使用範例」的投入產出比較低，決定聚焦在<strong>元件狀態與規範</strong>這兩個能直接解決痛點的部分。</p>
 
       <div class="image-block">
-        <span class="image-block__placeholder">參考過的品牌 Logo</span>
-      </div>
-
-      <div class="image-block">
-        <span class="image-block__placeholder">元件盤點表格截圖</span>
+        <span class="image-block__placeholder">參考過的設計系統 Logo</span>
       </div>
 
       <!-- 2. 全面盤點 -->
-      <h3>2. 全面盤點</h3>
-      <p>接著我針對這 34 個元件，開始進行盤點，目標是盡可能收集到所有已開發的元件。方法有截圖畫面、詢問工程師以及查找過去的稿件。這個過程對於我之後在撰寫元件規範，有著非常大的幫助，能夠更清楚這些元件在開發實際的樣子。</p>
+      <h3>2. 全面盤點 34 個元件</h3>
+      <p>透過截圖現有畫面、詢問工程師、翻查過去稿件，我盡可能收集所有已開發的元件樣態。這個過程讓我清楚掌握元件在實際開發中的樣子，為後續撰寫規範打下基礎。</p>
 
-      <!-- 3. 定義架構與命名規範 -->
-      <h3>3. 定義架構與命名規範</h3>
-      <p>收集了大量的資料後，我將所有元件進行整合，整合的方向分為以下幾種：</p>
+      <div class="image-block">
+        <span class="image-block__placeholder">元件盤點表格截圖（Google Sheet）</span>
+      </div>
 
-      <p><strong>樣式上的整合：</strong>相同的元件有著相同的樣式。</p>
+      <!-- 3. 定義統一規範 -->
+      <h3>3. 定義統一規範</h3>
+      <p>收集完資料後，我從三個維度進行整合：</p>
+
+      <p><strong>樣式整合：</strong>統一相同元件在不同頁面的視覺樣式。</p>
       <div class="image-block">
         <span class="image-block__placeholder">樣式整合 Before / After</span>
       </div>
 
-      <p><strong>命名上的整合：</strong>相同的元件有著相同的命名，並建立一套能直接對應到工程師能使用的 Design Tokens。</p>
+      <p><strong>命名整合：</strong>建立一套能直接對應工程師使用的 Design Token 命名系統，讓設計與開發說同一種語言。</p>
       <div class="image-block">
         <span class="image-block__placeholder">命名整合 Before / After</span>
       </div>
 
-      <p><strong>邏輯上的整合：</strong>統一元件的動畫時間、運動方向、狀態變化等等。</p>
+      <p><strong>邏輯整合：</strong>統一元件的動畫時間、運動方向、狀態變化等互動細節。</p>
       <div class="image-block">
         <span class="image-block__placeholder">邏輯整合 Before / After</span>
       </div>
 
       <!-- 4. 分階段導入 -->
-      <h3>4. 分階段導入</h3>
-      <p>花了將近半年後，終於可以將新的規範套用在產品上了，我與團隊的共識是希望在不影響既有的功能上，滾動式調整原有的畫面。一方面是避免大規模的更動導致大量的 BUG 出現，一方面也是因為團隊手邊還有許多更重要的專案要進行。所以我們採取大包小的策略：一個主要專案＋優化既有的元件。</p>
+      <h3>4. 分階段導入，降低風險</h3>
+      <p>為了避免大規模更動引發大量 Bug，我與團隊採取「大包小」策略：以一個主要進行中的產品專案為載體，同步優化既有元件，滾動式將新規範導入產品。這樣做一方面避免了大規模更動造成的風險，另一方面也讓團隊能持續推進手邊更重要的專案。</p>
 
       <div class="image-block">
         <span class="image-block__placeholder">大包小策略示意圖</span>
       </div>
 
-      <!-- 5. 持續迭代 -->
-      <h3>5. 持續迭代</h3>
-      <p>最後我們也建立了一套後續迭代的流程，避免再度累積可怕的設計債，透過流程也能讓團隊成員清楚知道現在元件處於哪個階段。</p>
+      <!-- 5. 建立迭代流程 -->
+      <h3>5. 建立迭代流程</h3>
+      <p>導入完成後，我也建立了一套後續更新的 SOP，讓團隊成員清楚知道當元件需要新增或修改時，該走什麼流程、誰來決策、何時同步，避免日後再度累積設計債。</p>
 
       <div class="process-flow">
         <div class="process-step">
@@ -160,55 +177,34 @@
 
       <hr>
 
-      <!-- 挑戰 -->
-      <h2>挑戰</h2>
-
-      <div class="challenge-block">
-        <div class="challenge-block__label">Challenge 1</div>
-        <p class="challenge-block__title">元件散落各處且數量龐大</p>
-        <p class="challenge-block__desc">由於元件沒有一套完整的使用規範，使得過往專案的元件充斥各式各樣的設定，有的大有的小，數量還非常的多。</p>
-      </div>
-      <div class="challenge-block">
-        <div class="challenge-block__label">Solution</div>
-        <p class="challenge-block__desc">使用插件與 AI 工具來加速重複性高的工作。</p>
-      </div>
-
-      <div class="challenge-pair"></div>
-      <div class="challenge-block">
-        <div class="challenge-block__label">Challenge 2</div>
-        <p class="challenge-block__title">舊有邏輯難以撼動</p>
-        <p class="challenge-block__desc">部分元件的背後可能涉及複雜的工程邏輯，若擅自更動可能會造成工程師開發上的困難。</p>
-      </div>
-      <div class="challenge-block">
-        <div class="challenge-block__label">Solution</div>
-        <p class="challenge-block__desc">討價還價，就算無法完全更動，也盡可能討論出兩方都能接受的折衷辦法，在堅守設計原則下也要尊重工程師的想法。</p>
-      </div>
-
-      <hr>
-
-      <!-- 專案成果 -->
-      <h2>專案成果</h2>
+      <!-- 成果 -->
+      <h2 id="results">成果</h2>
 
       <div class="results-grid">
         <div class="result-stat">
           <div class="result-stat__number">-50%</div>
-          <p class="result-stat__text">設計時間減少，小型專案從 2 天縮短至 1 天</p>
+          <p class="result-stat__text">小型專案設計時間<br>從平均 2 天縮短至 1 天</p>
         </div>
         <div class="result-stat">
           <div class="result-stat__number">-50%</div>
-          <p class="result-stat__text">工程 Bug 數量減少，因狀態缺漏導致的修復時間下降</p>
+          <p class="result-stat__text">每次專案設計 Bug 數<br>從 10–15 個降至約 5 個</p>
         </div>
         <div class="result-stat">
           <div class="result-stat__number">-50%</div>
-          <p class="result-stat__text">PM 驗收次數減少，平均過稿從 2 次以上降至 1 次</p>
+          <p class="result-stat__text">PM 過稿次數<br>從 2–3 次降至幾乎 1 次</p>
         </div>
       </div>
+
+      <p><strong>數據來源說明：</strong>設計時間依據 PM 規劃時程前後對比；Bug 數量來自每次專案後在 Miro 上記錄的複測清單；過稿次數為實際與 PM 審核流程的紀錄。</p>
+
+      <p>優化後的退稿原因也從「規格錯誤、基本失誤」轉變為「流程優化建議」，代表設計品質已提升到更高的討論層次。</p>
 
       <hr>
 
       <!-- 反思 -->
-      <h2>反思</h2>
-      <p>這個過程讓我大量閱讀了很多大公司的設計規範，然後再回頭去對照我們自己產品的技術限制。這讓我對每個元件的使用原則都有了更扎實的理解，不再只是單純畫圖，而是知道如何把設計變成一套可以被大家共同使用的標準。</p>
+      <h2 id="reflection">反思</h2>
+      <p>這個專案讓我第一次把設計當成「一套標準」來思考，而不只是一個畫面。大量閱讀成熟設計系統後再對照自家產品的技術限制，讓我對每個元件的使用原則有了更扎實的理解。</p>
+      <p>過程中最有挑戰的部分，是面對「舊有工程邏輯難以撼動」的情況。部分元件背後涉及複雜的工程邏輯，我學到的是：在堅守設計原則的同時，也要找到兩方都能接受的折衷方案，設計判斷必須建立在對工程現實的理解上。</p>
 
       <!-- Project Nav -->
       <nav class="project-nav">
@@ -225,6 +221,34 @@
       <p>&copy; 2026 LOU. All rights reserved.</p>
     </div>
   </footer>
+
+  <script>
+    (function () {
+      var headings = Array.from(document.querySelectorAll('.project-content h2[id]'));
+      var tocLinks = document.querySelectorAll('.toc__list a');
+      if (!headings.length || !tocLinks.length) return;
+
+      function setActive(id) {
+        tocLinks.forEach(function (a) { a.classList.remove('is-active'); });
+        var link = document.querySelector('.toc__list a[href="#' + id + '"]');
+        if (link) link.classList.add('is-active');
+      }
+
+      setActive(headings[0].id);
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            setActive(entry.target.id);
+          } else if (entry.boundingClientRect.top < 0) {
+            setActive(entry.target.id);
+          }
+        });
+      }, { rootMargin: '-88px 0px -55% 0px' });
+
+      headings.forEach(function (h) { observer.observe(h); });
+    })();
+  </script>
 
 </body>
 </html>
