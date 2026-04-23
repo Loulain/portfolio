@@ -6,27 +6,31 @@
   <title>人才評價 — LOU</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style.css">
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('theme');
+        var isDark = stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        if (isDark) document.documentElement.classList.add('dark');
+      } catch (e) {}
+    })();
+  </script>
 </head>
-<body>
+<body class="project-page">
 
   <!-- Navbar -->
   <nav class="navbar">
     <div class="container">
       <a href="../index.html" class="navbar__logo">LOU</a>
-      <button class="navbar__hamburger" aria-label="Toggle menu" onclick="document.querySelector('.navbar__links').classList.toggle('open')">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
       <ul class="navbar__links">
         <li><a href="../index.html">Home</a></li>
         <li class="navbar__dropdown">
-          <a href="#" class="active">Work</a>
+          <a href="#">Work</a>
           <ul class="navbar__dropdown-menu">
             <li><a href="project-1.html">建構品牌元件庫</a></li>
-            <li><a href="project-2.html">人才評價</a></li>
+            <li><a href="project-2.html" class="active">人才評價</a></li>
             <li><a href="project-3.html">金啾獎</a></li>
             <li><a href="project-4.html">刊登收費</a></li>
           </ul>
@@ -34,48 +38,92 @@
         <li><a href="../about.html">About</a></li>
         <li><a href="../index.html#contact">Contact</a></li>
       </ul>
+      <button class="theme-toggle" data-theme-toggle aria-label="切換主題" aria-pressed="false">
+        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2"></path>
+          <path d="M12 20v2"></path>
+          <path d="m4.93 4.93 1.41 1.41"></path>
+          <path d="m17.66 17.66 1.41 1.41"></path>
+          <path d="M2 12h2"></path>
+          <path d="M20 12h2"></path>
+          <path d="m6.34 17.66-1.41 1.41"></path>
+          <path d="m19.07 4.93-1.41 1.41"></path>
+        </svg>
+        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+      <button class="navbar__hamburger" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
   </nav>
 
   <!-- Project Hero -->
-  <section class="project-hero">
-    <div class="container">
-      <div class="project-hero__tags">
+  <header class="project-hero">
+    <div class="project-hero__inner">
+
+      <div class="project-hero__meta reveal">
         <span class="tag">Web</span>
         <span class="tag">App</span>
+        <span class="tag">2024</span>
       </div>
-      <h1>人才評價</h1>
-      <p>重新設計企業評價求職者的流程，將多維度評價簡化為單一星等，並透過聊天室內嵌評價卡片提升填寫率，整體評價數成長 51%。</p>
+
+      <h1 class="project-hero__title reveal" data-delay="1">人才評價</h1>
+
+      <p class="project-hero__subtitle reveal" data-delay="2">
+        <em>Candidate Review Redesign</em>
+      </p>
+
+      <p class="project-hero__lead reveal" data-delay="3">
+        重新設計企業評價求職者的流程，將多維度評價簡化為單一星等，並透過聊天室內嵌評價卡片提升填寫率，整體評價數成長 51%。
+      </p>
+
+      <dl class="project-hero__details reveal" data-delay="4">
+        <div><dt>Role</dt><dd>Lead Designer</dd></div>
+        <div><dt>Team</dt><dd>我 + PM + 工程團隊</dd></div>
+        <div><dt>Year</dt><dd>2024</dd></div>
+        <div><dt>Tools</dt><dd>Figma、Miro</dd></div>
+      </dl>
+
     </div>
-  </section>
+  </header>
+
+  <!-- TOC (fixed sidebar) -->
+  <aside class="toc" aria-label="目錄">
+    <p class="toc__label">CONTENTS</p>
+    <ul class="toc__list">
+      <li><a href="#background">背景與問題</a></li>
+      <li><a href="#role">我的角色與貢獻</a></li>
+      <li><a href="#process">設計過程</a></li>
+      <li><a href="#results">成果</a></li>
+      <li><a href="#reflection">反思</a></li>
+    </ul>
+  </aside>
 
   <!-- Project Content -->
-  <section class="project-content">
+  <article class="project-content">
+    <div class="project-content__inner">
 
-    <!-- Fixed TOC -->
-    <aside class="toc" aria-label="目錄">
-      <ul class="toc__list">
-        <li><a href="#background">背景與問題</a></li>
-        <li><a href="#role">我的角色與貢獻</a></li>
-        <li><a href="#process">設計過程</a></li>
-        <li><a href="#results">成果</a></li>
-        <li><a href="#reflection">反思</a></li>
-      </ul>
-    </aside>
-
-    <div class="container">
-
-      <div class="image-block">
-        <span class="image-block__placeholder">專案封面圖</span>
-      </div>
+      <!-- 封面圖 -->
+      <figure class="project-content__cover">
+        <div class="image-block">
+          <span class="image-block__placeholder">專案封面圖</span>
+        </div>
+      </figure>
 
       <!-- 背景與問題 -->
       <h2 id="background">背景與問題</h2>
       <p>舊有的評價流程為：求職者應徵職缺 → 雇主發送面試邀請 → 面試時間結束後系統自動跳出評價彈窗 → 雇主評價求職者 → 完成送出。</p>
 
-      <div class="image-block">
-        <span class="image-block__placeholder">舊版評價流程示意圖</span>
-      </div>
+      <figure>
+        <div class="image-block">
+          <span class="image-block__placeholder">舊版評價流程示意圖</span>
+        </div>
+      </figure>
 
       <p>根據後台數據發現這個流程有兩個明顯的斷點：</p>
 
@@ -85,17 +133,17 @@
         <p class="challenge-block__desc">從用戶行為推論，比起在產品內對談，雇主更傾向面對面或透過 LINE 等通訊軟體與求職者聯繫，因此面試結束後幾乎不會再回到 App。</p>
       </div>
 
-      <div class="challenge-pair"></div>
-
       <div class="challenge-block">
         <div class="challenge-block__label">斷點 2</div>
         <p class="challenge-block__title">收到評價通知後，直接關閉不填寫</p>
         <p class="challenge-block__desc">雖然有一定數量的用戶會看到評價介面，但實際填寫率明顯偏低。推測是既有介面要求填寫「態度」、「綜合表現」、「值得稱讚的地方」三個欄位，對於目的是找人而非評價人的雇主來說，這樣的填寫成本造成了認知負擔。</p>
       </div>
 
-      <div class="image-block">
-        <span class="image-block__placeholder">舊版評價介面截圖（態度、綜合表現、值得稱讚的地方三個欄位）</span>
-      </div>
+      <figure>
+        <div class="image-block">
+          <span class="image-block__placeholder">舊版評價介面截圖（態度、綜合表現、值得稱讚的地方三個欄位）</span>
+        </div>
+      </figure>
 
       <!-- 我的角色與貢獻 -->
       <h2 id="role">我的角色與貢獻</h2>
@@ -117,30 +165,38 @@
 
       <p>設計上我刻意讓卡片的資訊量維持最少，只呈現一個問題與五顆星星，讓雇主一眼就能理解目的。點擊星星後才會展開完整的評價頁面，並自動帶入在聊天室中已選擇的星等，避免重複操作，進一步降低填寫門檻。</p>
 
-      <div class="image-block">
-        <span class="image-block__placeholder">聊天室內評價卡片截圖</span>
-      </div>
+      <figure>
+        <div class="image-block">
+          <span class="image-block__placeholder">聊天室內評價卡片截圖</span>
+        </div>
+      </figure>
 
       <p>在顯示時機上，我也設計了觸發規則來確保卡片出現在合理的對話情境中：首次觸發需要雙方各累積三則訊息，代表已有一定程度的互動；若雇主未填寫，卡片會在三天後雙方再次各出現一則對話時重新顯示，持續提醒但不過度打擾。</p>
 
-      <div class="image-block">
-        <span class="image-block__placeholder">觸發規則的流程圖</span>
-      </div>
+      <figure>
+        <div class="image-block">
+          <span class="image-block__placeholder">觸發規則的流程圖</span>
+        </div>
+      </figure>
 
       <h3>問題二：收到評價通知後直接關閉</h3>
       <p>針對這個問題，我先進行了競品分析，發現多數產品的評價機制都採用單一量化指標，而非像我們拆成「態度」與「綜合表現」兩個維度。常見的評分方式大致可分為四種：數字量表（如 NPS 的 0–10 分）、語意量表（Likert Scale）、表情符號評分、以及拇指好壞評分。</p>
 
-      <div class="image-block">
-        <span class="image-block__placeholder">競品評價機制比較</span>
-      </div>
+      <figure>
+        <div class="image-block">
+          <span class="image-block__placeholder">競品評價機制比較</span>
+        </div>
+      </figure>
 
       <p>綜合考量我們的使用情境——雇主在面試後快速給予回饋——最終選擇了五星等評分，原因是它兼顧了評分的細緻度與填寫的低門檻，同時也是多數用戶最熟悉的評分模式。</p>
 
       <p>在介面設計上，我刻意只在首尾標示「很糟糕」與「超棒的」的方向性說明，省略中間星等的文字標籤，讓用戶能直覺理解評分方向而不被過多文字干擾。</p>
 
-      <div class="image-block">
-        <span class="image-block__placeholder">新版評價介面截圖（五星等 + 首尾方向性標示）</span>
-      </div>
+      <figure>
+        <div class="image-block">
+          <span class="image-block__placeholder">新版評價介面截圖（五星等 + 首尾方向性標示）</span>
+        </div>
+      </figure>
 
       <p>針對舊有資料的遷移，則採用將原本兩個維度的分數加總取平均的方式，轉換為新的單一星等。</p>
 
@@ -150,26 +206,31 @@
       <h2 id="results">成果</h2>
       <p>此專案於 2024 年 6 月 19 日隨 App 12.0.0 版本正式上線。比較上線前後各一個月的數據，對平台評價數帶來顯著提升：</p>
 
-      <div class="results-grid">
-        <div class="result-stat">
-          <div class="result-stat__number">+51%</div>
-          <p class="result-stat__text">整體新增評價數成長<br>從 19,999 筆增至 30,121 筆</p>
+      <div class="results">
+        <div class="result">
+          <span class="result__pill">成長了</span>
+          <div class="result__number">51%</div>
+          <p class="result__detail">整體新增評價數<br>從 19,999 筆增至 30,121 筆</p>
         </div>
-        <div class="result-stat">
-          <div class="result-stat__number">+28%</div>
-          <p class="result-stat__text">參與評價的企業數成長<br>從 7,805 家增至 9,998 家</p>
+        <div class="result">
+          <span class="result__pill">成長了</span>
+          <div class="result__number">28%</div>
+          <p class="result__detail">參與評價的企業數<br>從 7,805 家增至 9,998 家</p>
         </div>
-        <div class="result-stat">
-          <div class="result-stat__number">7,881</div>
-          <p class="result-stat__text">透過聊天室系統訊息<br>產生的評價，貢獻約 8% 增量</p>
+        <div class="result">
+          <span class="result__pill">新增</span>
+          <div class="result__number">7,881</div>
+          <p class="result__detail">聊天室系統訊息<br>產生的評價，貢獻約 8% 增量</p>
         </div>
       </div>
 
       <p>其中約 40% 的企業使用了系統評價訊息進行評分，該功能在各平台的活躍企業使用率落在 7%–10% 之間，顯示不同裝置的用戶都有穩定的採用率。</p>
 
-      <div class="image-block">
-        <span class="image-block__placeholder">上線前後數據比較圖表</span>
-      </div>
+      <figure>
+        <div class="image-block">
+          <span class="image-block__placeholder">上線前後數據比較圖表</span>
+        </div>
+      </figure>
 
       <p>在評分行為方面，由於新的評價流程大幅降低了填寫門檻，目前企業給出的評價中有 70% 集中在 5 分（最高分），顯示簡化後的機制有效引導了企業進行快速評分。後續可進一步觀察評分分布的變化，評估是否需要引導更多元的回饋內容。</p>
 
@@ -182,12 +243,18 @@
 
       <!-- Project Nav -->
       <nav class="project-nav">
-        <a href="project-1.html">&larr; 上一個專案</a>
-        <a href="project-3.html">下一個專案 &rarr;</a>
+        <a href="project-1.html" class="project-nav__prev">
+          <span class="project-nav__label">← Prev</span>
+          <span class="project-nav__title">建構品牌元件庫</span>
+        </a>
+        <a href="project-3.html" class="project-nav__next">
+          <span class="project-nav__label">Next →</span>
+          <span class="project-nav__title">金啾獎</span>
+        </a>
       </nav>
 
     </div>
-  </section>
+  </article>
 
   <!-- Footer -->
   <footer class="footer">
@@ -196,33 +263,6 @@
     </div>
   </footer>
 
-  <script>
-    (function () {
-      var headings = Array.from(document.querySelectorAll('.project-content h2[id]'));
-      var tocLinks = document.querySelectorAll('.toc__list a');
-      if (!headings.length || !tocLinks.length) return;
-
-      function setActive(id) {
-        tocLinks.forEach(function (a) { a.classList.remove('is-active'); });
-        var link = document.querySelector('.toc__list a[href="#' + id + '"]');
-        if (link) link.classList.add('is-active');
-      }
-
-      setActive(headings[0].id);
-
-      var observer = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            setActive(entry.target.id);
-          } else if (entry.boundingClientRect.top < 0) {
-            setActive(entry.target.id);
-          }
-        });
-      }, { rootMargin: '-88px 0px -55% 0px' });
-
-      headings.forEach(function (h) { observer.observe(h); });
-    })();
-  </script>
-
+  <script src="../main.js" defer></script>
 </body>
 </html>

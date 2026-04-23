@@ -6,66 +6,111 @@
   <title>金啾獎 — LOU</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style.css">
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('theme');
+        var isDark = stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        if (isDark) document.documentElement.classList.add('dark');
+      } catch (e) {}
+    })();
+  </script>
 </head>
-<body>
+<body class="project-page">
 
   <!-- Navbar -->
   <nav class="navbar">
     <div class="container">
       <a href="../index.html" class="navbar__logo">LOU</a>
-      <button class="navbar__hamburger" aria-label="Toggle menu" onclick="document.querySelector('.navbar__links').classList.toggle('open')">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
       <ul class="navbar__links">
         <li><a href="../index.html">Home</a></li>
         <li class="navbar__dropdown">
-          <a href="#" class="active">Work</a>
+          <a href="#">Work</a>
           <ul class="navbar__dropdown-menu">
             <li><a href="project-1.html">建構品牌元件庫</a></li>
             <li><a href="project-2.html">人才評價</a></li>
-            <li><a href="project-3.html">金啾獎</a></li>
+            <li><a href="project-3.html" class="active">金啾獎</a></li>
             <li><a href="project-4.html">刊登收費</a></li>
           </ul>
         </li>
         <li><a href="../about.html">About</a></li>
         <li><a href="../index.html#contact">Contact</a></li>
       </ul>
+      <button class="theme-toggle" data-theme-toggle aria-label="切換主題" aria-pressed="false">
+        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2"></path>
+          <path d="M12 20v2"></path>
+          <path d="m4.93 4.93 1.41 1.41"></path>
+          <path d="m17.66 17.66 1.41 1.41"></path>
+          <path d="M2 12h2"></path>
+          <path d="M20 12h2"></path>
+          <path d="m6.34 17.66-1.41 1.41"></path>
+          <path d="m19.07 4.93-1.41 1.41"></path>
+        </svg>
+        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+      <button class="navbar__hamburger" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
   </nav>
 
   <!-- Project Hero -->
-  <section class="project-hero">
-    <div class="container">
-      <div class="project-hero__tags">
+  <header class="project-hero">
+    <div class="project-hero__inner">
+
+      <div class="project-hero__meta reveal">
         <span class="tag">Web</span>
       </div>
-      <h1>金啾獎</h1>
-      <p>為年度頒獎活動打造的官方網站，結合活動資訊、入圍名單與線上投票功能，營造專屬的品牌氛圍。</p>
+
+      <h1 class="project-hero__title reveal" data-delay="1">金啾獎</h1>
+
+      <p class="project-hero__subtitle reveal" data-delay="2">
+        <em>Project subtitle coming soon.</em>
+      </p>
+
+      <p class="project-hero__lead reveal" data-delay="3">
+        專案摘要待補充。
+      </p>
+
+      <dl class="project-hero__details reveal" data-delay="4">
+        <div><dt>Role</dt><dd>TBD</dd></div>
+        <div><dt>Team</dt><dd>TBD</dd></div>
+        <div><dt>Year</dt><dd>TBD</dd></div>
+        <div><dt>Tools</dt><dd>TBD</dd></div>
+      </dl>
+
     </div>
-  </section>
+  </header>
+
+  <!-- TOC (fixed sidebar) -->
+  <aside class="toc" aria-label="目錄">
+    <p class="toc__label">CONTENTS</p>
+    <ul class="toc__list">
+      <li><a href="#background">專案背景</a></li>
+      <li><a href="#role">我的角色</a></li>
+      <li><a href="#highlights">設計亮點</a></li>
+      <li><a href="#results">成果</a></li>
+    </ul>
+  </aside>
 
   <!-- Project Content -->
-  <section class="project-content">
+  <article class="project-content">
+    <div class="project-content__inner">
 
-    <!-- Fixed TOC -->
-    <aside class="toc" aria-label="目錄">
-      <ul class="toc__list">
-        <li><a href="#background">專案背景</a></li>
-        <li><a href="#role">我的角色</a></li>
-        <li><a href="#highlights">設計亮點</a></li>
-        <li><a href="#results">成果</a></li>
-      </ul>
-    </aside>
-
-    <div class="container">
-
-      <div class="image-block">
-        <span class="image-block__placeholder">專案封面圖</span>
-      </div>
+      <!-- 封面圖 -->
+      <figure class="project-content__cover">
+        <div class="image-block">
+          <span class="image-block__placeholder">專案封面圖</span>
+        </div>
+      </figure>
 
       <h2 id="background">專案背景</h2>
       <p>金啾獎是一個年度性的頒獎活動，需要一個能完整呈現活動資訊、入圍名單，並支援線上投票的官方網站。網站需在短時間內承受大量流量。</p>
@@ -73,9 +118,11 @@
       <h2 id="role">我的角色</h2>
       <p>負責整體網站的視覺設計與互動體驗規劃。從品牌主視覺延伸到網頁設計，確保線上與線下活動的視覺一致性。</p>
 
-      <div class="image-block">
-        <span class="image-block__placeholder">設計細節展示</span>
-      </div>
+      <figure>
+        <div class="image-block">
+          <span class="image-block__placeholder">設計細節展示</span>
+        </div>
+      </figure>
 
       <h2 id="highlights">設計亮點</h2>
       <p>以活動主視覺為基礎，運用大膽的色彩與動態效果打造沉浸式的瀏覽體驗。投票流程經過簡化，使用者只需三步即可完成投票。</p>
@@ -85,12 +132,18 @@
 
       <!-- Project Nav -->
       <nav class="project-nav">
-        <a href="project-2.html">&larr; 上一個專案</a>
-        <a href="project-4.html">下一個專案 &rarr;</a>
+        <a href="project-2.html" class="project-nav__prev">
+          <span class="project-nav__label">← Prev</span>
+          <span class="project-nav__title">人才評價</span>
+        </a>
+        <a href="project-4.html" class="project-nav__next">
+          <span class="project-nav__label">Next →</span>
+          <span class="project-nav__title">刊登收費</span>
+        </a>
       </nav>
 
     </div>
-  </section>
+  </article>
 
   <!-- Footer -->
   <footer class="footer">
@@ -99,33 +152,6 @@
     </div>
   </footer>
 
-  <script>
-    (function () {
-      var headings = Array.from(document.querySelectorAll('.project-content h2[id]'));
-      var tocLinks = document.querySelectorAll('.toc__list a');
-      if (!headings.length || !tocLinks.length) return;
-
-      function setActive(id) {
-        tocLinks.forEach(function (a) { a.classList.remove('is-active'); });
-        var link = document.querySelector('.toc__list a[href="#' + id + '"]');
-        if (link) link.classList.add('is-active');
-      }
-
-      setActive(headings[0].id);
-
-      var observer = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            setActive(entry.target.id);
-          } else if (entry.boundingClientRect.top < 0) {
-            setActive(entry.target.id);
-          }
-        });
-      }, { rootMargin: '-88px 0px -55% 0px' });
-
-      headings.forEach(function (h) { observer.observe(h); });
-    })();
-  </script>
-
+  <script src="../main.js" defer></script>
 </body>
 </html>

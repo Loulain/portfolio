@@ -6,8 +6,17 @@
   <title>About — LOU</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('theme');
+        var isDark = stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        if (isDark) document.documentElement.classList.add('dark');
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body>
 
@@ -15,11 +24,6 @@
   <nav class="navbar">
     <div class="container">
       <a href="index.html" class="navbar__logo">LOU</a>
-      <button class="navbar__hamburger" aria-label="Toggle menu" onclick="document.querySelector('.navbar__links').classList.toggle('open')">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
       <ul class="navbar__links">
         <li><a href="index.html">Home</a></li>
         <li class="navbar__dropdown">
@@ -34,38 +38,59 @@
         <li><a href="about.html" class="active">About</a></li>
         <li><a href="index.html#contact">Contact</a></li>
       </ul>
+      <button class="theme-toggle" data-theme-toggle aria-label="切換主題" aria-pressed="false">
+        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2"></path>
+          <path d="M12 20v2"></path>
+          <path d="m4.93 4.93 1.41 1.41"></path>
+          <path d="m17.66 17.66 1.41 1.41"></path>
+          <path d="M2 12h2"></path>
+          <path d="M20 12h2"></path>
+          <path d="m6.34 17.66-1.41 1.41"></path>
+          <path d="m19.07 4.93-1.41 1.41"></path>
+        </svg>
+        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+      <button class="navbar__hamburger" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
   </nav>
 
   <!-- About Hero -->
   <section class="about-hero">
     <div class="container">
-      <h1>About Me</h1>
-      <p>對設計充滿熱忱，專注於打造清晰、直覺且具有意義的數位體驗。相信好的設計來自於對使用者的深入理解與對細節的堅持。</p>
+      <h1 class="reveal">About Me</h1>
+      <p class="reveal" data-delay="1">對設計充滿熱忱，專注於打造清晰、直覺且具有意義的數位體驗。相信好的設計來自於對使用者的深入理解與對細節的堅持。</p>
     </div>
   </section>
 
   <!-- Experience -->
   <section class="section">
     <div class="container">
-      <h2 class="section-title">Experience</h2>
+      <h2 class="section-title reveal">Experience</h2>
       <div class="timeline">
 
-        <div class="timeline-item">
+        <div class="timeline-item reveal" data-delay="1">
           <div class="timeline-item__date">2024 - 至今</div>
           <div class="timeline-item__role">Senior UI/UX Designer</div>
           <div class="timeline-item__company">某科技公司</div>
           <p class="timeline-item__desc">負責產品的使用者體驗設計與設計系統建構，主導多項核心功能的介面設計與優化。</p>
         </div>
 
-        <div class="timeline-item">
+        <div class="timeline-item reveal" data-delay="2">
           <div class="timeline-item__date">2022 - 2024</div>
           <div class="timeline-item__role">UI/UX Designer</div>
           <div class="timeline-item__company">某新創公司</div>
           <p class="timeline-item__desc">參與產品從零到一的設計過程，包含使用者研究、線框稿、視覺設計到交付開發。</p>
         </div>
 
-        <div class="timeline-item">
+        <div class="timeline-item reveal" data-delay="3">
           <div class="timeline-item__date">2020 - 2022</div>
           <div class="timeline-item__role">Junior Designer</div>
           <div class="timeline-item__company">某設計工作室</div>
@@ -79,8 +104,8 @@
   <!-- Contact -->
   <section class="section" id="contact">
     <div class="container">
-      <h2 class="section-title">Contact</h2>
-      <form class="contact-form" action="#" method="post">
+      <h2 class="section-title reveal">Contact</h2>
+      <form class="contact-form reveal" data-delay="1" action="#" method="post">
         <div class="form-group">
           <label for="name">姓名</label>
           <input type="text" id="name" name="name" placeholder="請輸入您的姓名" required>
@@ -105,5 +130,6 @@
     </div>
   </footer>
 
+  <script src="main.js" defer></script>
 </body>
 </html>
