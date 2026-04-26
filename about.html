@@ -18,7 +18,7 @@
     })();
   </script>
 </head>
-<body>
+<body class="about-page">
 
   <!-- Navbar -->
   <nav class="navbar">
@@ -62,66 +62,118 @@
     </div>
   </nav>
 
-  <!-- About Hero -->
+  <!-- Hero -->
   <section class="about-hero">
     <div class="container">
-      <h1 class="reveal">About Me</h1>
-      <p class="reveal" data-delay="1">對設計充滿熱忱，專注於打造清晰、直覺且具有意義的數位體驗。相信好的設計來自於對使用者的深入理解與對細節的堅持。</p>
+      <h1 class="reveal">賴彥儒</h1>
+      <p class="hero__subtitle reveal" data-delay="1"><em>Product Designer based in Taoyuan, Taiwan.</em></p>
+      <p class="hero__lead reveal" data-delay="2">
+        跟 PM 一起想清楚，再跟工程師一起做出來。<br>
+        專注於數位雲端產業，在策略定義與技術落地之間做設計。
+      </p>
     </div>
   </section>
 
   <!-- Experience -->
-  <section class="section">
+  <section class="section" id="experience">
     <div class="container">
       <h2 class="section-title reveal">Experience</h2>
-      <div class="timeline">
+      <table class="exp-table reveal" data-delay="1">
+        <tbody>
+          <tr>
+            <td class="exp-table__role">產品設計師</td>
+            <td class="exp-table__company">數字科技</td>
+            <td class="exp-table__year">2022–至今</td>
+          </tr>
+          <tr>
+            <td class="exp-table__role">UI Designer</td>
+            <td class="exp-table__company">TeamJoined</td>
+            <td class="exp-table__year">2020–2022</td>
+          </tr>
+          <tr>
+            <td class="exp-table__role">理財專員</td>
+            <td class="exp-table__company">玉山金控</td>
+            <td class="exp-table__year">2019–2020</td>
+          </tr>
+          <tr>
+            <td class="exp-table__role">產業經濟學系</td>
+            <td class="exp-table__company">淡江大學</td>
+            <td class="exp-table__year">2014–2018</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
 
-        <div class="timeline-item reveal" data-delay="1">
-          <div class="timeline-item__date">2024 - 至今</div>
-          <div class="timeline-item__role">Senior UI/UX Designer</div>
-          <div class="timeline-item__company">某科技公司</div>
-          <p class="timeline-item__desc">負責產品的使用者體驗設計與設計系統建構，主導多項核心功能的介面設計與優化。</p>
+  <!-- Skills & Tools -->
+  <section class="section" id="skills">
+    <div class="container">
+      <h2 class="section-title reveal">Skills &amp; Tools</h2>
+      <div class="skills-grid reveal" data-delay="1">
+        <div class="skills-col">
+          <h3 class="skills-col__title">能力</h3>
+          <ul class="skills-list">
+            <li>協作與溝通</li>
+            <li>解決問題</li>
+            <li>領導力</li>
+            <li>HTML / CSS</li>
+          </ul>
         </div>
-
-        <div class="timeline-item reveal" data-delay="2">
-          <div class="timeline-item__date">2022 - 2024</div>
-          <div class="timeline-item__role">UI/UX Designer</div>
-          <div class="timeline-item__company">某新創公司</div>
-          <p class="timeline-item__desc">參與產品從零到一的設計過程，包含使用者研究、線框稿、視覺設計到交付開發。</p>
+        <div class="skills-col">
+          <h3 class="skills-col__title">工具</h3>
+          <ul class="skills-list">
+            <li>Figma</li>
+            <li>Claude</li>
+            <li>Miro</li>
+            <li>Google Sheet</li>
+            <li>Notion</li>
+          </ul>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="timeline-item reveal" data-delay="3">
-          <div class="timeline-item__date">2020 - 2022</div>
-          <div class="timeline-item__role">Junior Designer</div>
-          <div class="timeline-item__company">某設計工作室</div>
-          <p class="timeline-item__desc">協助執行品牌視覺設計與網站介面設計專案，累積紮實的視覺設計基礎。</p>
-        </div>
-
+  <!-- Testimonials -->
+  <section class="section" id="testimonials">
+    <div class="container">
+      <h2 class="section-title reveal">同事評價</h2>
+      <div class="testimonials-grid">
+        <blockquote class="testimonial reveal" data-delay="1">
+          <p>「這裡先放同事評價的假字，之後會替換成真實內容。」</p>
+          <footer class="testimonial__footer">同事 A · 職稱</footer>
+        </blockquote>
+        <blockquote class="testimonial reveal" data-delay="2">
+          <p>「這裡先放同事評價的假字，之後會替換成真實內容。」</p>
+          <footer class="testimonial__footer">同事 B · 職稱</footer>
+        </blockquote>
+        <blockquote class="testimonial reveal" data-delay="3">
+          <p>「這裡先放同事評價的假字，之後會替換成真實內容。」</p>
+          <footer class="testimonial__footer">同事 C · 職稱</footer>
+        </blockquote>
       </div>
     </div>
   </section>
 
   <!-- Contact -->
-  <section class="section" id="contact">
-    <div class="container">
-      <h2 class="section-title reveal">Contact</h2>
-      <form class="contact-form reveal" data-delay="1" action="#" method="post">
-        <div class="form-group">
-          <label for="name">姓名</label>
-          <input type="text" id="name" name="name" placeholder="請輸入您的姓名" required>
-        </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" placeholder="請輸入您的 Email" required>
-        </div>
-        <div class="form-group">
-          <label for="message">訊息</label>
-          <textarea id="message" name="message" placeholder="請輸入訊息內容" required></textarea>
-        </div>
-        <button type="submit" class="btn">送出訊息</button>
-      </form>
-    </div>
-  </section>
+  <div id="contact" class="container">
+    <section class="contact-block">
+      <div class="contact-email">
+        <span class="contact-email__text">loulain1006@gmail.com</span>
+        <button class="btn btn--outlined contact-email__copy" onclick="copyEmail()">複製</button>
+      </div>
+      <div class="contact-links">
+        <a href="https://www.linkedin.com/in/loulain1006" target="_blank"
+           class="contact-link" aria-label="LinkedIn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+               viewBox="0 0 24 24" fill="currentColor">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+            <rect x="2" y="9" width="4" height="12"/>
+            <circle cx="4" cy="4" r="2"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+  </div>
 
   <!-- Footer -->
   <footer class="footer">

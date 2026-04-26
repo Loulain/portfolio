@@ -120,3 +120,10 @@
     }
   }
 })();
+
+function copyEmail() {
+  navigator.clipboard.writeText('loulain1006@gmail.com');
+  var btn = document.querySelector('.contact-email__copy');
+  btn.textContent = '已複製！';
+  setTimeout(function () { btn.textContent = '複製'; }, 2000);
+}
