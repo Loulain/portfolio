@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LOU — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── Hero override ── */
+    .hero {
+      padding-top: 180px;
+      padding-bottom: 96px;
+      text-align: left;
+    }
+
+    .hero .container {
+      max-width: 1040px;
+    }
+
+    .hero__headline {
+      font-family: var(--font-serif-tc);
+      font-size: clamp(1.75rem, 4vw, 48px);
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--color-text);
+      margin-bottom: 20px;
+    }
+
+    .hero__en {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-style: italic;
+      font-weight: 400;
+      line-height: 1.5;
+      color: var(--color-text-muted);
+      margin-bottom: 20px;
+    }
+
+    .hero__bio {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.75;
+      color: var(--color-text-muted);
+      max-width: 600px;
+    }
+
+    /* ── Work list — editorial ── */
+    .work-section .container {
+      max-width: 1040px;
+    }
+
+    .work-list {
+      border-top: 1px solid var(--color-border);
+    }
+
+    .work-item {
+      display: flex;
+      gap: 48px;
+      align-items: flex-start;
+      padding: 48px 0;
+      border-bottom: 1px solid var(--color-border);
+      text-decoration: none;
+      color: inherit;
+      transition: opacity 0.2s ease;
+    }
+
+    .work-item:hover {
+      opacity: 0.75;
+    }
+
+    .work-item__thumb {
+      width: 40%;
+      flex-shrink: 0;
+      aspect-ratio: 16 / 10;
+      background-color: var(--color-bg-subtle);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      transition: background-color var(--transition-theme), border-color var(--transition-theme);
+    }
+
+    .work-item__thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .work-item__body {
+      flex: 1;
+      min-width: 0;
+      padding-top: 4px;
+    }
+
+    .work-item__tag {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--color-text-muted);
+      letter-spacing: 0.04em;
+      margin-bottom: 14px;
+    }
+
+    .work-item__title {
+      font-family: var(--font-serif-tc);
+      font-size: 28px;
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -0.015em;
+      color: var(--color-text);
+      margin-bottom: 12px;
+    }
+
+    .work-item__summary {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--color-text-muted);
+    }
+
+    /* ── Contact ── */
+    .contact-section {
+      border-top: 1px solid var(--color-border);
+    }
+
+    /* ── RWD ── */
+    @media (max-width: 768px) {
+      .hero {
+        padding-top: 140px;
+        padding-bottom: 64px;
+      }
+
+      .work-item {
+        flex-direction: column;
+        gap: 20px;
+        padding: 36px 0;
+      }
+
+      .work-item__thumb {
+        width: 100%;
+      }
+
+      .work-item__title {
+        font-size: 22px;
+      }
+    }
+  </style>
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('theme');
+        var isDark = stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        if (isDark) document.documentElement.classList.add('dark');
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar__logo">LOU</a>
+      <ul class="navbar__links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li class="navbar__dropdown">
+          <a href="#">Work</a>
+          <ul class="navbar__dropdown-menu">
+            <li><a href="works/project-1.html">建構品牌元件庫</a></li>
+            <li><a href="works/project-2.html">人才評價</a></li>
+            <li><a href="works/project-3.html">金啾獎</a></li>
+            <li><a href="works/project-4.html">刊登收費</a></li>
+          </ul>
+        </li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="theme-toggle" data-theme-toggle aria-label="切換主題" aria-pressed="false">
+        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2"></path>
+          <path d="M12 20v2"></path>
+          <path d="m4.93 4.93 1.41 1.41"></path>
+          <path d="m17.66 17.66 1.41 1.41"></path>
+          <path d="M2 12h2"></path>
+          <path d="M20 12h2"></path>
+          <path d="m6.34 17.66-1.41 1.41"></path>
+          <path d="m19.07 4.93-1.41 1.41"></path>
+        </svg>
+        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+      <button class="navbar__hamburger" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <h1 class="hero__headline reveal">和 PM 一起畫藍圖，和工程師一起搬磚</h1>
+      <p class="hero__en reveal" data-delay="1"><em>From the first whiteboard to the last pull request.</em></p>
+      <p class="hero__bio reveal" data-delay="2">專注於數位雲端產業的產品設計師，在策略定義與技術落地之間做設計。</p>
+    </div>
+  </section>
+
+  <!-- Selected Work -->
+  <section class="section work-section" id="work">
+    <div class="container">
+      <p class="section-title reveal">Selected Work</p>
+      <div class="work-list">
+
+        <a href="works/project-1.html" class="work-item reveal">
+          <div class="work-item__thumb">
+            <img src="images/project-1-cover.jpg" alt="建構品牌元件庫">
+          </div>
+          <div class="work-item__body">
+            <span class="work-item__tag">Design System · 2024</span>
+            <h2 class="work-item__title">建構品牌元件庫</h2>
+            <p class="work-item__summary">不只整理元件，而是建立一套設計與工程共用的標準。</p>
+          </div>
+        </a>
+
+        <a href="works/project-2.html" class="work-item reveal" data-delay="1">
+          <div class="work-item__thumb">
+            <span class="thumb__placeholder">Thumbnail</span>
+          </div>
+          <div class="work-item__body">
+            <span class="work-item__tag">Web · App · 2024</span>
+            <h2 class="work-item__title">人才評價</h2>
+            <p class="work-item__summary">最輕的介面，放在最對的時間點，評價填寫率就這樣起來了。</p>
+          </div>
+        </a>
+
+        <a href="works/project-3.html" class="work-item reveal" data-delay="2">
+          <div class="work-item__thumb">
+            <span class="thumb__placeholder">Thumbnail</span>
+          </div>
+          <div class="work-item__body">
+            <span class="work-item__tag">Web · 2024–2026</span>
+            <h2 class="work-item__title">金啾獎</h2>
+            <p class="work-item__summary">連續兩年主導金啾獎活動頁設計，在維持頒獎典禮核心概念的前提下，讓每一屆都有獨特的視覺語言與記憶點。</p>
+          </div>
+        </a>
+
+        <a href="works/project-4.html" class="work-item reveal" data-delay="3">
+          <div class="work-item__thumb">
+            <span class="thumb__placeholder">Thumbnail</span>
+          </div>
+          <div class="work-item__body">
+            <span class="work-item__tag">Web · 2024</span>
+            <h2 class="work-item__title">刊登收費</h2>
+            <p class="work-item__summary">重新設計刊登收費流程，將複雜的付費環節精簡化，以視覺化方式呈現方案差異，降低使用者決策成本。</p>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <div id="contact" class="container contact-section">
+    <section class="contact-block">
+      <div class="contact-email">
+        <span class="contact-email__text">loulain1006@gmail.com</span>
+        <button class="btn btn--outlined contact-email__copy" onclick="copyEmail()">複製</button>
+      </div>
+      <div class="contact-links">
+        <a href="https://www.linkedin.com/in/loulain1006" target="_blank"
+           class="contact-link" aria-label="LinkedIn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+               viewBox="0 0 24 24" fill="currentColor">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+            <rect x="2" y="9" width="4" height="12"/>
+            <circle cx="4" cy="4" r="2"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 LOU. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="main.js" defer></script>
+</body>
+</html>

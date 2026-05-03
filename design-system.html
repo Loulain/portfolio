@@ -1,0 +1,1907 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design System v2 — LOU Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>
+  (function(){
+    try{
+      var s=localStorage.getItem('theme');
+      var d=s==='dark'||(!s&&window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if(d) document.documentElement.classList.add('dark');
+    }catch(e){}
+  })();
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+/* ── Shell ── */
+.ds-shell{
+  display:flex;
+  min-height:100vh;
+  background-color:hsl(var(--background));
+  color:hsl(var(--foreground));
+  font-family:"Noto Sans TC",sans-serif;
+}
+
+/* ── Sidebar ── */
+.ds-sidebar{
+  position:fixed;
+  top:0;left:0;
+  width:224px;height:100vh;
+  background-color:hsl(var(--card));
+  border-right:1px solid hsl(var(--border));
+  display:flex;flex-direction:column;
+  z-index:200;
+  transition:transform .3s cubic-bezier(.22,1,.36,1),
+             background-color .3s ease,border-color .3s ease;
+  overflow-y:auto;
+}
+
+.ds-sidebar__header{
+  padding:20px 18px 14px;
+  border-bottom:1px solid hsl(var(--border));
+  flex-shrink:0;
+  transition:border-color .3s ease;
+}
+
+.ds-sidebar__logo{
+  font-family:"Noto Serif TC",serif;
+  font-size:18px;font-weight:700;
+  letter-spacing:-.02em;
+  color:hsl(var(--foreground));
+}
+
+.ds-sidebar__meta{
+  font-size:11px;
+  color:hsl(var(--muted-foreground));
+  margin-top:3px;
+  display:flex;gap:8px;align-items:center;
+}
+
+.ds-sidebar__version{
+  background-color:var(--accent);
+  color:hsl(var(--primary));
+  font-weight:600;
+  padding:1px 7px;
+  border-radius:99px;
+  font-size:10px;
+}
+
+.ds-nav{padding:10px 0 20px;flex:1}
+
+.ds-nav__group{margin-bottom:2px}
+
+.ds-nav__label{
+  font-size:10px;font-weight:600;
+  text-transform:uppercase;letter-spacing:.12em;
+  color:hsl(var(--muted-foreground));
+  padding:10px 18px 4px;
+  display:block;
+}
+
+.ds-nav__item{
+  display:flex;align-items:center;gap:8px;
+  padding:7px 18px;
+  font-size:13px;font-weight:500;
+  color:hsl(var(--muted-foreground));
+  text-decoration:none;
+  border-left:2px solid transparent;
+  transition:color .2s,background-color .2s,border-color .2s;
+  cursor:pointer;
+}
+
+.ds-nav__item:hover{
+  color:hsl(var(--foreground));
+  background-color:hsl(var(--muted));
+}
+
+.ds-nav__item.is-active{
+  color:hsl(var(--primary));
+  border-left-color:hsl(var(--primary));
+  background-color:var(--accent);
+  font-weight:600;
+}
+
+.ds-nav__dot{
+  width:6px;height:6px;
+  border-radius:50%;
+  background-color:currentColor;
+  opacity:.4;
+  flex-shrink:0;
+}
+.ds-nav__item.is-active .ds-nav__dot{opacity:1}
+
+/* ── Main ── */
+.ds-main{
+  margin-left:224px;
+  flex:1;
+  padding:36px 52px 100px;
+  max-width:calc(100vw - 224px);
+}
+
+/* ── Topbar ── */
+.ds-topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:44px;
+  padding-bottom:20px;
+  border-bottom:1px solid hsl(var(--border));
+}
+
+.ds-topbar__left{display:flex;align-items:center;gap:10px}
+
+.ds-menu-btn{
+  display:none;
+  background:none;border:1px solid hsl(var(--border));
+  border-radius:var(--radius);
+  width:36px;height:36px;
+  align-items:center;justify-content:center;
+  cursor:pointer;color:hsl(var(--foreground));
+  transition:background-color .2s,border-color .2s;
+}
+.ds-menu-btn:hover{background-color:hsl(var(--muted))}
+
+.ds-topbar__title{
+  font-family:"Noto Serif TC",serif;
+  font-size:20px;font-weight:700;
+  color:hsl(var(--foreground));
+}
+
+.ds-topbar__badge{
+  font-size:11px;font-weight:600;
+  background-color:var(--accent);
+  color:hsl(var(--primary));
+  padding:3px 10px;
+  border-radius:99px;
+  letter-spacing:.04em;
+}
+
+.ds-topbar__actions{display:flex;align-items:center;gap:8px}
+
+.ds-back-link{
+  font-size:13px;font-weight:500;
+  color:hsl(var(--muted-foreground));
+  text-decoration:none;
+  padding:7px 14px;
+  border:1px solid hsl(var(--border));
+  border-radius:var(--radius);
+  transition:.2s ease;
+  display:flex;align-items:center;gap:4px;
+}
+.ds-back-link:hover{color:hsl(var(--foreground));border-color:hsl(var(--primary)/.4)}
+
+/* ── Sections ── */
+.ds-section{
+  display:none;
+  animation:ds-fade .25s ease forwards;
+}
+.ds-section.is-active{display:block}
+
+@keyframes ds-fade{
+  from{opacity:0;transform:translateY(6px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.ds-section__title{
+  font-family:"Noto Serif TC",serif;
+  font-size:26px;font-weight:700;
+  letter-spacing:-.02em;
+  color:hsl(var(--foreground));
+  margin-bottom:6px;
+}
+
+.ds-section__desc{
+  font-size:14px;
+  color:hsl(var(--muted-foreground));
+  line-height:1.7;
+  margin-bottom:36px;
+  max-width:560px;
+}
+
+/* ── Block ── */
+.ds-block{
+  background-color:hsl(var(--card));
+  border:1px solid hsl(var(--border));
+  border-radius:var(--radius);
+  padding:24px 28px;
+  margin-bottom:20px;
+  transition:background-color .3s ease,border-color .3s ease;
+}
+
+.ds-block__title{
+  font-size:11px;font-weight:600;
+  text-transform:uppercase;letter-spacing:.1em;
+  color:hsl(var(--muted-foreground));
+  margin-bottom:18px;
+  display:flex;align-items:center;gap:8px;
+}
+
+.ds-block__title::after{
+  content:'';flex:1;height:1px;
+  background-color:hsl(var(--border));
+}
+
+/* ── Color Swatches ── */
+.ds-swatches{display:flex;flex-wrap:wrap;gap:10px}
+
+.ds-swatch{
+  width:86px;
+  border-radius:calc(var(--radius) - 2px);
+  overflow:hidden;
+  border:1px solid hsl(var(--border));
+  cursor:pointer;
+  transition:transform .2s ease,box-shadow .2s ease;
+  position:relative;
+}
+.ds-swatch:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+
+.ds-swatch__color{
+  height:56px;
+  transition:transform .2s ease;
+  position:relative;
+}
+
+.ds-swatch__copy-hint{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  background-color:rgba(0,0,0,.3);
+  color:white;font-size:10px;font-weight:600;
+  opacity:0;transition:opacity .15s;
+  border-radius:0;
+}
+.ds-swatch:hover .ds-swatch__copy-hint{opacity:1}
+
+.ds-swatch__label{
+  padding:7px 8px;
+  background-color:hsl(var(--card));
+  font-size:10px;font-weight:500;
+  color:hsl(var(--muted-foreground));
+  line-height:1.5;
+  transition:background-color .3s ease;
+}
+
+.ds-swatch__name{
+  font-weight:700;
+  color:hsl(var(--foreground));
+  font-size:10px;
+  display:block;
+}
+
+.ds-swatch__hex{
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;
+  opacity:.7;
+}
+
+/* ── Typography ── */
+.ds-type-row{
+  display:flex;align-items:baseline;gap:24px;
+  padding:14px 0;
+  border-bottom:1px solid hsl(var(--border));
+}
+.ds-type-row:last-child{border-bottom:none;padding-bottom:0}
+.ds-type-row:first-child{padding-top:0}
+
+.ds-type-meta{
+  min-width:210px;
+  font-size:11px;
+  color:hsl(var(--muted-foreground));
+  line-height:1.6;
+  flex-shrink:0;
+}
+
+.ds-type-meta strong{
+  display:block;
+  font-size:12px;font-weight:600;
+  color:hsl(var(--foreground));
+  margin-bottom:2px;
+}
+
+.ds-type-meta code{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;
+  background-color:hsl(var(--muted));
+  padding:1px 5px;border-radius:3px;
+  color:hsl(var(--primary));
+}
+
+/* ── Spacing ── */
+.ds-spacing-list{display:flex;flex-direction:column;gap:10px}
+.ds-spacing-row{display:flex;align-items:center;gap:14px}
+
+.ds-spacing-bar{
+  background-color:hsl(var(--primary) / 0.18);
+  border:1px solid hsl(var(--primary) / 0.35);
+  border-radius:3px;
+  height:26px;
+  flex-shrink:0;
+}
+
+.ds-spacing-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:12px;font-weight:500;
+  color:hsl(var(--foreground));
+  min-width:52px;
+}
+
+.ds-spacing-desc{
+  font-size:12px;
+  color:hsl(var(--muted-foreground));
+}
+
+/* ── Radius ── */
+.ds-radius-list{display:flex;flex-wrap:wrap;gap:20px}
+
+.ds-radius-item{
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+}
+
+.ds-radius-box{
+  width:64px;height:64px;
+  background-color:var(--accent);
+  border:2px solid hsl(var(--primary) / 0.5);
+}
+
+.ds-radius-label{
+  font-size:11px;font-weight:500;
+  color:hsl(var(--muted-foreground));
+  text-align:center;line-height:1.5;
+}
+.ds-radius-label strong{display:block;color:hsl(var(--foreground));font-size:12px}
+
+/* ── Motion ── */
+.ds-motion-list{display:flex;flex-direction:column;gap:0}
+
+.ds-motion-row{
+  display:flex;align-items:center;gap:16px;
+  padding:14px 0;
+  border-bottom:1px solid hsl(var(--border));
+}
+.ds-motion-row:last-child{border-bottom:none}
+
+.ds-motion-meta{min-width:220px;flex-shrink:0}
+
+.ds-motion-meta strong{
+  display:block;font-size:13px;font-weight:600;
+  color:hsl(var(--foreground));margin-bottom:2px;
+}
+
+.ds-motion-meta span{
+  font-size:11px;color:hsl(var(--muted-foreground));
+  font-family:'JetBrains Mono',monospace;
+}
+
+.ds-motion-track{
+  flex:1;height:40px;
+  background-color:hsl(var(--muted));
+  border-radius:var(--radius);
+  position:relative;overflow:hidden;
+}
+
+.ds-motion-dot{
+  position:absolute;
+  top:50%;left:8px;
+  transform:translateY(-50%);
+  width:24px;height:24px;
+  background-color:hsl(var(--primary));
+  border-radius:50%;
+}
+
+.ds-motion-play{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:11px;font-weight:600;
+  color:hsl(var(--primary));
+  background-color:var(--accent);
+  border:none;padding:6px 12px;
+  border-radius:calc(var(--radius) - 2px);
+  cursor:pointer;
+  transition:background-color .2s;
+  white-space:nowrap;
+  font-family:"Noto Sans TC",sans-serif;
+}
+.ds-motion-play:hover{background-color:hsl(var(--primary)/0.15)}
+
+/* ── Preview Frame ── */
+.ds-preview{
+  background-color:hsl(var(--background));
+  border:1px solid hsl(var(--border));
+  border-radius:var(--radius);
+  padding:28px;
+  margin-bottom:8px;
+  transition:background-color .3s ease,border-color .3s ease;
+}
+
+.ds-preview--grid{
+  display:flex;flex-wrap:wrap;gap:14px;align-items:flex-start;
+}
+
+/* Code badge */
+.ds-code{
+  display:inline-block;
+  font-size:11px;font-weight:500;
+  font-family:'JetBrains Mono',monospace;
+  background-color:hsl(var(--muted));
+  color:hsl(var(--primary));
+  padding:2px 8px;
+  border-radius:4px;
+  margin-bottom:14px;
+  border:1px solid hsl(var(--border));
+}
+
+/* ── Principles ── */
+.ds-principles-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:16px;
+}
+
+.ds-principle{
+  padding:20px;
+  background-color:hsl(var(--background));
+  border:1px solid hsl(var(--border));
+  border-radius:var(--radius);
+  transition:border-color .3s ease,transform .3s cubic-bezier(.22,1,.36,1);
+}
+.ds-principle:hover{
+  border-color:hsl(var(--primary)/.4);
+  transform:translateY(-3px);
+}
+
+.ds-principle__num{
+  font-family:"Noto Serif TC",serif;
+  font-size:28px;font-weight:700;
+  color:hsl(var(--primary));
+  line-height:1;
+  margin-bottom:10px;
+}
+
+.ds-principle__title{
+  font-size:14px;font-weight:600;
+  color:hsl(var(--foreground));
+  margin-bottom:6px;
+}
+
+.ds-principle__desc{
+  font-size:13px;
+  color:hsl(var(--muted-foreground));
+  line-height:1.7;
+}
+
+/* ── Do / Don't ── */
+.ds-do-dont{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  margin-bottom:16px;
+}
+
+.ds-do,.ds-dont{
+  padding:16px 18px;
+  border-radius:var(--radius);
+  border:1px solid hsl(var(--border));
+}
+
+.ds-do{border-top:3px solid hsl(142 55% 45%)}
+.ds-dont{border-top:3px solid hsl(0 65% 55%)}
+
+.ds-do__label{
+  font-size:11px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.08em;
+  color:hsl(142 55% 45%);
+  margin-bottom:8px;
+}
+
+.ds-dont__label{
+  font-size:11px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.08em;
+  color:hsl(0 65% 55%);
+  margin-bottom:8px;
+}
+
+.ds-do code,.ds-dont code{
+  display:block;
+  font-family:'JetBrains Mono',monospace;
+  font-size:12px;
+  line-height:1.7;
+  background-color:hsl(var(--muted));
+  padding:8px 12px;
+  border-radius:calc(var(--radius) - 2px);
+  color:hsl(var(--foreground));
+  word-break:break-all;
+}
+
+/* ── A11y ── */
+.ds-a11y-list{display:flex;flex-direction:column;gap:12px}
+
+.ds-a11y-item{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:14px 16px;
+  background-color:hsl(var(--background));
+  border:1px solid hsl(var(--border));
+  border-radius:var(--radius);
+}
+
+.ds-a11y-icon{
+  width:28px;height:28px;
+  border-radius:50%;
+  background-color:var(--accent);
+  color:hsl(var(--primary));
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  font-size:13px;
+  font-weight:700;
+}
+
+.ds-a11y-content strong{
+  display:block;
+  font-size:13px;font-weight:600;
+  color:hsl(var(--foreground));
+  margin-bottom:3px;
+}
+
+.ds-a11y-content p{
+  font-size:12px;
+  color:hsl(var(--muted-foreground));
+  line-height:1.6;
+}
+
+/* Focus demo */
+.ds-focus-demo{
+  display:flex;gap:12px;flex-wrap:wrap;align-items:center;
+  padding:20px;
+  background-color:hsl(var(--background));
+  border:1px solid hsl(var(--border));
+  border-radius:var(--radius);
+}
+
+.ds-focus-demo a,
+.ds-focus-demo button,
+.ds-focus-demo input{
+  font-family:"Noto Sans TC",sans-serif;
+}
+
+/* ── Breakpoints ── */
+.ds-bp-list{display:flex;flex-direction:column;gap:0}
+
+.ds-bp-row{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:16px 0;
+  border-bottom:1px solid hsl(var(--border));
+}
+.ds-bp-row:last-child{border-bottom:none}
+
+.ds-bp-icon{font-size:22px;width:36px;text-align:center;flex-shrink:0;margin-top:2px}
+
+.ds-bp-meta strong{
+  display:block;font-size:14px;font-weight:600;
+  color:hsl(var(--foreground));
+}
+
+.ds-bp-meta span{
+  font-size:12px;color:hsl(var(--muted-foreground));
+}
+
+.ds-bp-changes{
+  margin-top:8px;
+  display:flex;flex-wrap:wrap;gap:5px;
+}
+
+.ds-bp-chip{
+  font-size:11px;font-weight:500;
+  background-color:hsl(var(--muted));
+  color:hsl(var(--foreground));
+  padding:3px 10px;
+  border-radius:99px;
+}
+
+/* ── Toast ── */
+.ds-toast{
+  position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);
+  background-color:hsl(var(--foreground));
+  color:hsl(var(--background));
+  font-size:13px;font-weight:500;
+  padding:10px 20px;
+  border-radius:var(--radius);
+  opacity:0;
+  transition:opacity .2s ease,transform .2s ease;
+  pointer-events:none;
+  z-index:999;
+  white-space:nowrap;
+}
+.ds-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ── Checklist ── */
+.ds-checklist{display:flex;flex-direction:column;gap:8px}
+
+.ds-check-item{
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:13px;
+  color:hsl(var(--foreground));
+  line-height:1.5;
+  padding:10px 14px;
+  border-radius:var(--radius);
+  background-color:hsl(var(--background));
+  border:1px solid hsl(var(--border));
+  cursor:pointer;
+  transition:border-color .2s,background-color .2s;
+  user-select:none;
+}
+.ds-check-item:hover{border-color:hsl(var(--primary)/.4)}
+.ds-check-item.checked{background-color:hsl(142 55% 45% / .08);border-color:hsl(142 55% 45% / .4)}
+
+.ds-check-item__box{
+  width:16px;height:16px;
+  border-radius:4px;
+  border:2px solid hsl(var(--border));
+  flex-shrink:0;
+  margin-top:1px;
+  display:flex;align-items:center;justify-content:center;
+  transition:background-color .2s,border-color .2s;
+}
+.ds-check-item.checked .ds-check-item__box{
+  background-color:hsl(142 55% 45%);
+  border-color:hsl(142 55% 45%);
+}
+
+.ds-check-item.checked .ds-check-item__text{
+  text-decoration:line-through;
+  opacity:.5;
+}
+
+/* ── Overlay ── */
+.ds-overlay{
+  display:none;
+  position:fixed;inset:0;
+  background-color:hsl(0 0% 0% / .4);
+  z-index:199;
+}
+
+/* ── Responsive ── */
+@media(max-width:768px){
+  .ds-sidebar{transform:translateX(-100%)}
+  .ds-sidebar.is-open{transform:translateX(0)}
+  .ds-main{margin-left:0;max-width:100vw;padding:20px 18px 60px}
+  .ds-menu-btn{display:inline-flex}
+  .ds-overlay.is-open{display:block}
+  .ds-swatches{gap:8px}
+  .ds-swatch{width:74px}
+  .ds-motion-meta{min-width:140px}
+  .ds-type-row{flex-direction:column;gap:8px}
+  .ds-type-meta{min-width:unset}
+  .ds-do-dont{grid-template-columns:1fr}
+  .ds-principles-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="ds-shell">
+
+<!-- Toast notification -->
+<div class="ds-toast" id="dsToast">已複製！</div>
+
+<!-- Overlay (mobile) -->
+<div class="ds-overlay" id="dsOverlay"></div>
+
+<!-- Sidebar -->
+<aside class="ds-sidebar" id="dsSidebar">
+  <div class="ds-sidebar__header">
+    <div class="ds-sidebar__logo">LOU · DS</div>
+    <div class="ds-sidebar__meta">
+      <span class="ds-sidebar__version">v2.0</span>
+      2026-05-03
+    </div>
+  </div>
+  <nav class="ds-nav">
+    <div class="ds-nav__group">
+      <span class="ds-nav__label">Foundations</span>
+      <a class="ds-nav__item is-active" data-target="colors"><span class="ds-nav__dot"></span>Colors</a>
+      <a class="ds-nav__item" data-target="typography"><span class="ds-nav__dot"></span>Typography</a>
+      <a class="ds-nav__item" data-target="spacing"><span class="ds-nav__dot"></span>Spacing</a>
+      <a class="ds-nav__item" data-target="radius"><span class="ds-nav__dot"></span>Border Radius</a>
+      <a class="ds-nav__item" data-target="motion"><span class="ds-nav__dot"></span>Motion</a>
+    </div>
+    <div class="ds-nav__group">
+      <span class="ds-nav__label">Components</span>
+      <a class="ds-nav__item" data-target="components"><span class="ds-nav__dot"></span>All Components</a>
+    </div>
+    <div class="ds-nav__group">
+      <span class="ds-nav__label">Guidelines</span>
+      <a class="ds-nav__item" data-target="principles"><span class="ds-nav__dot"></span>Design Principles</a>
+      <a class="ds-nav__item" data-target="a11y"><span class="ds-nav__dot"></span>Accessibility</a>
+      <a class="ds-nav__item" data-target="breakpoints"><span class="ds-nav__dot"></span>Breakpoints</a>
+      <a class="ds-nav__item" data-target="checklist"><span class="ds-nav__dot"></span>AI Checklist</a>
+    </div>
+  </nav>
+</aside>
+
+<!-- Main -->
+<main class="ds-main">
+  <div class="ds-topbar">
+    <div class="ds-topbar__left">
+      <button class="ds-menu-btn" id="dsMenuBtn" aria-label="Toggle sidebar">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+      <div class="ds-topbar__title" id="dsPageTitle">Colors</div>
+      <span class="ds-topbar__badge" id="dsPageBadge">Foundations</span>
+    </div>
+    <div class="ds-topbar__actions">
+      <a href="index.html" class="ds-back-link">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        Portfolio
+      </a>
+      <button class="theme-toggle" data-theme-toggle aria-label="切換主題" aria-pressed="false">
+        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg>
+        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- ═══ COLORS ═══ -->
+  <section class="ds-section is-active" id="sec-colors">
+    <h1 class="ds-section__title">Colors</h1>
+    <p class="ds-section__desc">所有顏色以 CSS 變數定義，透過 <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:hsl(var(--muted));padding:2px 7px;border-radius:4px;color:hsl(var(--primary))">hsl(var(--token))</code> 使用。點擊色票可複製 token。</p>
+
+    <div class="ds-block">
+      <div class="ds-block__title">Light Theme</div>
+      <div class="ds-swatches" id="swatchesLight"></div>
+    </div>
+
+    <div class="ds-block">
+      <div class="ds-block__title">Dark Theme</div>
+      <div style="background-color:hsl(240 10% 8%);border-radius:calc(var(--radius) - 2px);padding:18px;">
+        <div class="ds-swatches" id="swatchesDark"></div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <div class="ds-block__title">Live Preview（跟隨當前主題）</div>
+      <div class="ds-swatches" id="swatchesLive"></div>
+    </div>
+
+    <div class="ds-block">
+      <div class="ds-block__title">Shadows</div>
+      <div style="display:flex;flex-wrap:wrap;gap:20px;align-items:flex-end">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+          <div style="width:80px;height:64px;background-color:hsl(var(--card));border-radius:var(--radius);box-shadow:var(--shadow-sm)"></div>
+          <span style="font-size:11px;color:hsl(var(--muted-foreground))">shadow-sm</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+          <div style="width:80px;height:64px;background-color:hsl(var(--card));border-radius:var(--radius);box-shadow:var(--shadow-md)"></div>
+          <span style="font-size:11px;color:hsl(var(--muted-foreground))">shadow-md</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+          <div style="width:80px;height:64px;background-color:hsl(var(--card));border-radius:var(--radius);box-shadow:var(--shadow-lg)"></div>
+          <span style="font-size:11px;color:hsl(var(--muted-foreground))">shadow-lg</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <div class="ds-block__title">Token 選用規則</div>
+      <div class="ds-do-dont">
+        <div class="ds-do">
+          <div class="ds-do__label">✓ 正確</div>
+          <code>color: hsl(var(--primary))
+background: hsl(var(--card))
+border: 1px solid hsl(var(--border))
+background: var(--accent)</code>
+        </div>
+        <div class="ds-dont">
+          <div class="ds-dont__label">✗ 禁止</div>
+          <code>color: #D97757
+background: white
+border: 1px solid #E5E3DC
+background: rgba(217,119,87,.08)</code>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ TYPOGRAPHY ═══ -->
+  <section class="ds-section" id="sec-typography">
+    <h1 class="ds-section__title">Typography</h1>
+    <p class="ds-section__desc">字體家族：<strong>Noto Serif TC</strong>（標題）、<strong>Noto Sans TC</strong>（內文）。基礎字級 16px，行高 1.8。</p>
+
+    <div class="ds-block">
+      <div class="ds-block__title">Font Families</div>
+      <div style="display:flex;gap:40px;flex-wrap:wrap">
+        <div>
+          <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:hsl(var(--muted-foreground));margin-bottom:10px">Sans — Noto Sans TC</div>
+          <div style="font-size:36px;font-family:'Noto Sans TC',sans-serif;color:hsl(var(--foreground));line-height:1">Aa 設計</div>
+          <div style="font-size:12px;color:hsl(var(--muted-foreground));margin-top:6px">400 · 500 · 600 · 700</div>
+          <div style="font-size:11px;font-family:'JetBrains Mono',monospace;color:hsl(var(--primary));margin-top:4px;background:hsl(var(--muted));padding:3px 8px;border-radius:4px;display:inline-block">var(--font-sans)</div>
+        </div>
+        <div>
+          <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:hsl(var(--muted-foreground));margin-bottom:10px">Serif — Noto Serif TC</div>
+          <div style="font-size:36px;font-family:'Noto Serif TC',serif;color:hsl(var(--foreground));line-height:1">Aa 設計</div>
+          <div style="font-size:12px;color:hsl(var(--muted-foreground));margin-top:6px">400 · 500 · 600 · 700</div>
+          <div style="font-size:11px;font-family:'JetBrains Mono',monospace;color:hsl(var(--primary));margin-top:4px;background:hsl(var(--muted));padding:3px 8px;border-radius:4px;display:inline-block">var(--font-serif-tc)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <div class="ds-block__title">Type Scale</div>
+      <div>
+        <div class="ds-type-row">
+          <div class="ds-type-meta"><strong>Hero Title</strong><code>clamp(3.5rem, 8vw, 7rem)</code> · w700 · Serif</div>
+          <div style="font-family:'Noto Serif TC',serif;font-size:clamp(1.8rem,4.5vw,3.5rem);font-weight:700;letter-spacing:-.03em;line-height:1.08;color:hsl(var(--foreground))">LOU</div>
+        </div>
+        <div class="ds-type-row">
+          <div class="ds-type-meta"><strong>About / Page H1</strong><code>clamp(2.5rem, 6vw, 4.5rem)</code> · w700 · Serif</div>
+          <div style="font-family:'Noto Serif TC',serif;font-size:clamp(1.5rem,3.5vw,2.5rem);font-weight:700;letter-spacing:-.03em;color:hsl(var(--foreground))">About Me</div>
+        </div>
+        <div class="ds-type-row">
+          <div class="ds-type-meta"><strong>Project H1</strong><code>clamp(2.2rem, 5vw, 3.5rem)</code> · w700 · Serif</div>
+          <div style="font-family:'Noto Serif TC',serif;font-size:clamp(1.4rem,3vw,2.2rem);font-weight:700;letter-spacing:-.02em;color:hsl(var(--foreground))">建構品牌元件庫</div>
+        </div>
+        <div class="ds-type-row">
+          <div class="ds-type-meta"><strong>Content H2</strong><code>28px</code> · w600 · Serif</div>
+          <div style="font-family:'Noto Serif TC',serif;font-size:28px;font-weight:600;color:hsl(var(--foreground))">設計決策</div>
+        </div>
+        <div class="ds-type-row">
+          <div class="ds-type-meta"><strong>Content H3</strong><code>22px</code> · w600 · Serif</div>
+          <div style="font-family:'Noto Serif TC',serif;font-size:22px;font-weight:600;color:hsl(var(--foreground))">問題定義</div>
+        </div>
+        <div class="ds-type-row">
+          <div class="ds-type-meta"><strong>Card Title</strong><code>20px</code> · w600 · ls-0.01em · Serif</div>
+          <div style="font-family:'Noto Serif TC',serif;font-size:20px;font-weight:600;letter-spacing:-.01em;color:hsl(var(--card-foreground))">人才評價系統</div>
+        </div>
+        <div class="ds-type-row">
+          <div class="ds-type-meta"><strong>Navbar Logo</strong><code>22px</code> · w700 · Serif</div>
+          <div style="font-family:'Noto Serif TC',serif;font-size:22px;font-weight:700;letter-spacing:-.02em;color:hsl(var(--foreground))">LOU</div>
+        </div>
+        <div class="ds-type-row">
+          <div class="ds-type-meta"><strong>Body / Paragraph</strong><code>16px · lh1.8</code> · Sans</div>
+          <div style="font-size:16px;line-height:1.8;color:hsl(var(--foreground)/0.78);max-width:420px">專注於使用者體驗與介面設計，將複雜需求轉化為簡潔直覺的數位產品。</div>
+        </div>
+        <div class="ds-type-row">
+          <div class="ds-type-meta"><strong>Nav Link</strong><code>14px · w500</code> · Sans</div>
+          <div style="font-size:14px;font-weight:500;color:hsl(var(--muted-foreground))">Work · About · Contact</div>
+        </div>
+        <div class="ds-type-row">
+          <div class="ds-type-meta"><strong>Section Label</strong><code>13px · w600 · UPPERCASE</code> · Sans</div>
+          <div style="font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:hsl(var(--muted-foreground))">Selected Work</div>
+        </div>
+        <div class="ds-type-row">
+          <div class="ds-type-meta"><strong>Tag</strong><code>12px · w500</code> · Sans</div>
+          <span class="tag">Design System</span>
+        </div>
+        <div class="ds-type-row">
+          <div class="ds-type-meta"><strong>Caption / Date</strong><code>13px · w400</code> · Sans</div>
+          <div style="font-size:13px;color:hsl(var(--muted-foreground))">2024 — 2025</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SPACING ═══ -->
+  <section class="ds-section" id="sec-spacing">
+    <h1 class="ds-section__title">Spacing</h1>
+    <p class="ds-section__desc">4px 基礎網格系統，所有間距取其整數倍。視覺化長度對應實際像素。</p>
+
+    <div class="ds-block">
+      <div class="ds-block__title">Base Scale</div>
+      <div class="ds-spacing-list" id="spacingList"></div>
+    </div>
+
+    <div class="ds-block">
+      <div class="ds-block__title">Layout Dimensions</div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+          <div style="flex:1;min-width:160px;padding:14px 16px;background-color:hsl(var(--muted));border-radius:var(--radius)">
+            <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:hsl(var(--muted-foreground));margin-bottom:4px">Container max-width</div>
+            <div style="font-size:18px;font-weight:700;color:hsl(var(--foreground));font-family:'JetBrains Mono',monospace">1080px</div>
+          </div>
+          <div style="flex:1;min-width:160px;padding:14px 16px;background-color:hsl(var(--muted));border-radius:var(--radius)">
+            <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:hsl(var(--muted-foreground));margin-bottom:4px">Navbar height</div>
+            <div style="font-size:18px;font-weight:700;color:hsl(var(--foreground));font-family:'JetBrains Mono',monospace">64px</div>
+          </div>
+          <div style="flex:1;min-width:160px;padding:14px 16px;background-color:hsl(var(--muted));border-radius:var(--radius)">
+            <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:hsl(var(--muted-foreground));margin-bottom:4px">Reading width</div>
+            <div style="font-size:18px;font-weight:700;color:hsl(var(--foreground));font-family:'JetBrains Mono',monospace">640–720px</div>
+          </div>
+          <div style="flex:1;min-width:160px;padding:14px 16px;background-color:hsl(var(--muted));border-radius:var(--radius)">
+            <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:hsl(var(--muted-foreground));margin-bottom:4px">Section padding</div>
+            <div style="font-size:18px;font-weight:700;color:hsl(var(--foreground));font-family:'JetBrains Mono',monospace">96px / 64px</div>
+          </div>
+        </div>
+        <div style="height:64px;background-color:var(--accent);border:1px solid hsl(var(--primary)/.3);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:hsl(var(--primary));letter-spacing:.04em">NAVBAR HEIGHT — 64px</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ BORDER RADIUS ═══ -->
+  <section class="ds-section" id="sec-radius">
+    <h1 class="ds-section__title">Border Radius</h1>
+    <p class="ds-section__desc"><code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:hsl(var(--muted));padding:2px 7px;border-radius:4px;color:hsl(var(--primary))">--radius: 0.5rem (8px)</code> 為基礎，其他值由此衍生。</p>
+
+    <div class="ds-block">
+      <div class="ds-block__title">Radius Scale</div>
+      <div class="ds-radius-list">
+        <div class="ds-radius-item">
+          <div class="ds-radius-box" style="border-radius:0"></div>
+          <div class="ds-radius-label"><strong>0px</strong>sharp</div>
+        </div>
+        <div class="ds-radius-item">
+          <div class="ds-radius-box" style="border-radius:calc(var(--radius) - 2px)"></div>
+          <div class="ds-radius-label"><strong>6px</strong>Tag · Menu item<br><span style="font-family:'JetBrains Mono',monospace;font-size:9px;opacity:.7">--radius - 2px</span></div>
+        </div>
+        <div class="ds-radius-item">
+          <div class="ds-radius-box" style="border-radius:var(--radius)"></div>
+          <div class="ds-radius-label"><strong>8px</strong>Card · Button<br><span style="font-family:'JetBrains Mono',monospace;font-size:9px;opacity:.7">--radius</span></div>
+        </div>
+        <div class="ds-radius-item">
+          <div class="ds-radius-box" style="border-radius:calc(var(--radius) + 4px)"></div>
+          <div class="ds-radius-label"><strong>12px</strong>Input field<br><span style="font-family:'JetBrains Mono',monospace;font-size:9px;opacity:.7">--radius + 4px</span></div>
+        </div>
+        <div class="ds-radius-item">
+          <div class="ds-radius-box" style="border-radius:50%"></div>
+          <div class="ds-radius-label"><strong>50%</strong>Avatar · Dot<br><span style="font-family:'JetBrains Mono',monospace;font-size:9px;opacity:.7">50%</span></div>
+        </div>
+        <div class="ds-radius-item">
+          <div class="ds-radius-box" style="border-radius:99px;width:100px;height:36px;margin:14px 0"></div>
+          <div class="ds-radius-label"><strong>99px</strong>Pill · Badge<br><span style="font-family:'JetBrains Mono',monospace;font-size:9px;opacity:.7">99px</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <div class="ds-block__title">Applied Examples</div>
+      <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:center">
+        <span class="tag">Tag · 6px</span>
+        <button class="btn" style="min-height:auto;padding:10px 20px">Button · 8px</button>
+        <input type="text" placeholder="Input · 12px" style="padding:10px 16px;background-color:hsl(var(--input));border:1px solid hsl(var(--border));border-radius:calc(var(--radius)+4px);color:hsl(var(--foreground));font-family:'Noto Sans TC',sans-serif;font-size:14px;outline:none;width:160px">
+        <div style="width:42px;height:42px;border-radius:50%;background-color:var(--accent);border:2px solid hsl(var(--primary)/.4);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:hsl(var(--primary))">UI</div>
+        <span style="font-size:12px;padding:4px 14px;border-radius:99px;background-color:hsl(var(--muted));color:hsl(var(--foreground));font-weight:500">Pill · 99px</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ MOTION ═══ -->
+  <section class="ds-section" id="sec-motion">
+    <h1 class="ds-section__title">Motion</h1>
+    <p class="ds-section__desc">點擊「Play」觀看緩動效果。系統支援 <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:hsl(var(--muted));padding:2px 7px;border-radius:4px;color:hsl(var(--primary))">prefers-reduced-motion</code>，動畫將自動停用。</p>
+
+    <div class="ds-block">
+      <div class="ds-block__title">Easing Functions</div>
+      <div class="ds-motion-list">
+        <div class="ds-motion-row">
+          <div class="ds-motion-meta">
+            <strong>--ease-out-expo</strong>
+            <span>cubic-bezier(0.22, 1, 0.36, 1)</span>
+          </div>
+          <div class="ds-motion-track" id="track-expo"><div class="ds-motion-dot" id="dot-expo"></div></div>
+          <button class="ds-motion-play" onclick="playMotion('expo','cubic-bezier(0.22,1,0.36,1)','0.7s')">▶ 0.7s</button>
+        </div>
+        <div class="ds-motion-row">
+          <div class="ds-motion-meta">
+            <strong>ease (default)</strong>
+            <span>0.2s — color transitions</span>
+          </div>
+          <div class="ds-motion-track" id="track-ease"><div class="ds-motion-dot" id="dot-ease"></div></div>
+          <button class="ds-motion-play" onclick="playMotion('ease','ease','0.2s')">▶ 0.2s</button>
+        </div>
+        <div class="ds-motion-row">
+          <div class="ds-motion-meta">
+            <strong>--transition-theme</strong>
+            <span>0.3s ease — theme switch</span>
+          </div>
+          <div class="ds-motion-track" id="track-theme"><div class="ds-motion-dot" id="dot-theme"></div></div>
+          <button class="ds-motion-play" onclick="playMotion('theme','ease','0.3s')">▶ 0.3s</button>
+        </div>
+        <div class="ds-motion-row">
+          <div class="ds-motion-meta">
+            <strong>Image zoom / Icon rotate</strong>
+            <span>0.4s ease-out-expo</span>
+          </div>
+          <div class="ds-motion-track" id="track-img"><div class="ds-motion-dot" id="dot-img"></div></div>
+          <button class="ds-motion-play" onclick="playMotion('img','cubic-bezier(0.22,1,0.36,1)','0.4s')">▶ 0.4s</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <div class="ds-block__title">Scroll Reveal Stagger</div>
+      <div style="display:flex;gap:16px;align-items:flex-end">
+        <div id="reveal-demo" style="display:flex;gap:8px;align-items:flex-end"></div>
+        <button class="ds-motion-play" onclick="playReveal()">▶ Play</button>
+      </div>
+      <div style="font-size:12px;color:hsl(var(--muted-foreground));margin-top:14px">每個 bar 對應 <code style="font-family:'JetBrains Mono',monospace;background:hsl(var(--muted));padding:1px 5px;border-radius:3px">data-delay="1~6"</code>，間隔 0.08s</div>
+    </div>
+
+    <div class="ds-block">
+      <div class="ds-block__title">Duration Reference</div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-end" id="dur-ref"></div>
+    </div>
+  </section>
+
+  <!-- ═══ COMPONENTS ═══ -->
+  <section class="ds-section" id="sec-components">
+    <h1 class="ds-section__title">Components</h1>
+    <p class="ds-section__desc">所有元件直接使用 <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:hsl(var(--muted));padding:2px 7px;border-radius:4px;color:hsl(var(--primary))">style.css</code> 的 class，預覽與網站完全一致。Hover 互動均已啟用。</p>
+
+    <div class="ds-block">
+      <div class="ds-block__title">Tag</div>
+      <code class="ds-code">.tag</code>
+      <div class="ds-preview ds-preview--grid">
+        <span class="tag">Design System</span>
+        <span class="tag">Web</span>
+        <span class="tag">App</span>
+        <span class="tag">UX Research</span>
+        <span class="tag">Product</span>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <div class="ds-block__title">Button</div>
+      <code class="ds-code">.btn · .btn--full · .btn--outlined</code>
+      <div class="ds-preview ds-preview--grid" style="align-items:center">
+        <button class="btn">Primary Button</button>
+        <button class="btn btn--full" style="max-width:220px">Full Width</button>
+        <button class="btn btn--outlined">Outlined</button>
+        <button class="btn" style="opacity:.45;cursor:not-allowed" disabled>Disabled</button>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <div class="ds-block__title">Theme Toggle</div>
+      <code class="ds-code">.theme-toggle · [data-theme-toggle]</code>
+      <div class="ds-preview ds-preview--grid" style="align-items:center">
+        <button class="theme-toggle" data-theme-toggle aria-label="切換主題" aria-pressed="false">
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg>
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+        <span style="font-size:13px;color:hsl(var(--muted-foreground))">點擊切換 Light / Dark</span>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <div class="ds-block__title">Navbar Preview</div>
+      <code class="ds-code">.navbar · .navbar__logo · .navbar__links · .navbar__dropdown</code>
+      <div class="ds-preview" style="padding:0;overflow:hidden">
+        <nav style="background-color:var(--nav-bg);backdrop-filter:blur(12px);border-bottom:1px solid hsl(var(--border))">
+          <div style="display:flex;justify-content:space-between;align-items:center;height:64px;padding:0 24px;gap:16px">
+            <a href="#" class="navbar__logo" style="pointer-events:none">LOU</a>
+            <ul class="navbar__links" style="position:static;display:flex;background:none;border:none;padding:0">
+              <li><a href="#" class="active" style="pointer-events:none">Work</a></li>
+              <li class="navbar__dropdown">
+                <a href="#" style="pointer-events:none">Projects</a>
+                <ul class="navbar__dropdown-menu">
+                  <li><a href="#" style="pointer-events:none">建構品牌元件庫</a></li>
+                  <li><a href="#" style="pointer-events:none">人才評價</a></li>
+                </ul>
+              </li>
+              <li><a href="#" style="pointer-events:none">About</a></li>
+            </ul>
+            <button class="theme-toggle" aria-label="切換主題" data-theme-toggle>
+              <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg>
+              <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <div class="ds-block__title">Project Card</div>
+      <code class="ds-code">.project-card · .project-card__thumb · .project-card__body</code>
+      <div class="ds-preview">
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:24px">
+          <a href="#" class="project-card" onclick="return false">
+            <div class="project-card__thumb"><span class="thumb__placeholder">Thumbnail 16/10</span></div>
+            <div class="project-card__body">
+              <div class="project-card__tags"><span class="tag">Design System</span></div>
+              <h3 class="project-card__title">建構品牌元件庫</h3>
+            </div>
+          </a>
+          <a href="#" class="project-card" onclick="return false">
+            <div class="project-card__thumb"><span class="thumb__placeholder">Thumbnail 16/10</span></div>
+            <div class="project-card__body">
+              <div class="project-card__tags"><span class="tag">Web</span><span class="tag">App</span></div>
+              <h3 class="project-card__title">人才評價系統</h3>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <div class="ds-block__title">Timeline</div>
+      <code class="ds-code">.timeline · .timeline-item</code>
+      <div class="ds-preview">
+        <div class="timeline" style="max-width:460px">
+          <div class="timeline-item">
+            <div class="timeline-item__date">2024 — 現在</div>
+            <div class="timeline-item__role">Senior Product Designer</div>
+            <div class="timeline-item__company">某科技公司</div>
+            <div class="timeline-item__desc">負責核心產品的 UX 策略與設計系統建立。</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-item__date">2022 — 2024</div>
+            <div class="timeline-item__role">Product Designer</div>
+            <div class="timeline-item__company">某新創團隊</div>
+            <div class="timeline-item__desc">從 0 到 1 設計 B2B SaaS 產品介面。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <div class="ds-block__title">Stakeholder Card &amp; Result Stat</div>
+      <code class="ds-code">.stakeholder-grid · .stakeholder-card · .results-grid · .result-stat</code>
+      <div class="ds-preview">
+        <div class="stakeholder-grid" style="max-width:640px">
+          <div class="stakeholder-card">
+            <div class="stakeholder-card__icon">PM</div>
+            <div class="stakeholder-card__role">Product Manager</div>
+            <div class="stakeholder-card__quote">需要清楚的功能邊界定義</div>
+          </div>
+          <div class="stakeholder-card">
+            <div class="stakeholder-card__icon">DEV</div>
+            <div class="stakeholder-card__role">Developer</div>
+            <div class="stakeholder-card__quote">希望規格一致易於實作</div>
+          </div>
+          <div class="stakeholder-card">
+            <div class="stakeholder-card__icon">DS</div>
+            <div class="stakeholder-card__role">Designer</div>
+            <div class="stakeholder-card__quote">Single source of truth</div>
+          </div>
+        </div>
+        <div class="results-grid" style="max-width:640px;margin-top:20px">
+          <div class="result-stat">
+            <div class="result-stat__number">↑40%</div>
+            <div class="result-stat__text">開發效率提升</div>
+          </div>
+          <div class="result-stat">
+            <div class="result-stat__number">3×</div>
+            <div class="result-stat__text">元件複用率</div>
+          </div>
+          <div class="result-stat">
+            <div class="result-stat__number">↓60%</div>
+            <div class="result-stat__text">設計不一致問題</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <div class="ds-block__title">Challenge Block</div>
+      <code class="ds-code">.challenge-pair · .challenge-block</code>
+      <div class="ds-preview">
+        <div style="max-width:540px">
+          <div class="challenge-pair">
+            <div class="challenge-block">
+              <div class="challenge-block__label">Challenge</div>
+              <div class="challenge-block__title">元件命名缺乏共識</div>
+              <div class="challenge-block__desc">設計師與工程師對同一元件使用不同名稱，造成溝通成本。</div>
+            </div>
+            <div class="challenge-block" style="border-color:hsl(var(--primary)/.3)">
+              <div class="challenge-block__label" style="color:hsl(142 60% 45%)">Solution</div>
+              <div class="challenge-block__title">建立統一命名字典</div>
+              <div class="challenge-block__desc">與 PM、RD 共同制定元件命名規範，寫入設計系統文件。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <div class="ds-block__title">Process Flow</div>
+      <code class="ds-code">.process-flow · .process-step</code>
+      <div class="ds-preview">
+        <div class="process-flow">
+          <div class="process-step"><div class="process-step__num">01</div><div class="process-step__text">研究與定義</div></div>
+          <div class="process-step"><div class="process-step__num">02</div><div class="process-step__text">概念發散</div></div>
+          <div class="process-step"><div class="process-step__num">03</div><div class="process-step__text">原型製作</div></div>
+          <div class="process-step"><div class="process-step__num">04</div><div class="process-step__text">測試迭代</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <div class="ds-block__title">Contact Form</div>
+      <code class="ds-code">.contact-form · .form-group · .contact-form__row</code>
+      <div class="ds-preview">
+        <form class="contact-form" onsubmit="return false">
+          <div class="contact-form__row">
+            <div class="form-group">
+              <label for="ds-name">姓名</label>
+              <input type="text" id="ds-name" placeholder="王大明">
+            </div>
+            <div class="form-group">
+              <label for="ds-email">Email</label>
+              <input type="email" id="ds-email" placeholder="hello@example.com">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="ds-msg">內容</label>
+            <textarea id="ds-msg" placeholder="請輸入你的訊息" style="min-height:100px"></textarea>
+          </div>
+          <button type="submit" class="btn btn--full">送出</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <div class="ds-block__title">Footer</div>
+      <code class="ds-code">.footer</code>
+      <div class="ds-preview" style="padding:0;overflow:hidden">
+        <footer class="footer" style="margin:0">
+          <div class="container"><p>&copy; 2026 LOU. All rights reserved.</p></div>
+        </footer>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PRINCIPLES ═══ -->
+  <section class="ds-section" id="sec-principles">
+    <h1 class="ds-section__title">Design Principles</h1>
+    <p class="ds-section__desc">六條核心原則，指導所有設計決策。AI 修改時須以這些原則為依據。</p>
+
+    <div class="ds-block">
+      <div class="ds-block__title">Core Principles</div>
+      <div class="ds-principles-grid">
+        <div class="ds-principle">
+          <div class="ds-principle__num">01</div>
+          <div class="ds-principle__title">暖色調中性</div>
+          <div class="ds-principle__desc">主色 Hue 20（橙棕），背景用暖米白。避免冷調純白或高飽和色彩，製造溫暖人性感。</div>
+        </div>
+        <div class="ds-principle">
+          <div class="ds-principle__num">02</div>
+          <div class="ds-principle__title">Typography 主導層次</div>
+          <div class="ds-principle__desc">Serif 標題製造溫度，Sans 內文保持清晰。大小落差明確，用字體語言而非顏色建立視覺層次。</div>
+        </div>
+        <div class="ds-principle">
+          <div class="ds-principle__num">03</div>
+          <div class="ds-principle__title">細節動態回饋</div>
+          <div class="ds-principle__desc">每個互動（hover / focus / active）都有對應的 transform 或顏色回饋。介面有生命感，而非靜態圖片。</div>
+        </div>
+        <div class="ds-principle">
+          <div class="ds-principle__num">04</div>
+          <div class="ds-principle__title">主題無縫切換</div>
+          <div class="ds-principle__desc">所有元件透過 CSS 變數切換，不依賴 JS 干預顏色。Light 與 Dark 的情緒都是溫暖的，非冷峻對比。</div>
+        </div>
+        <div class="ds-principle">
+          <div class="ds-principle__num">05</div>
+          <div class="ds-principle__title">內容呼吸感</div>
+          <div class="ds-principle__desc">容器最大寬 1080px，閱讀寬度 640–720px。版面不塞滿，讓內容和視線都有舒緩的空間。</div>
+        </div>
+        <div class="ds-principle">
+          <div class="ds-principle__num">06</div>
+          <div class="ds-principle__title">一致的 Hover 語言</div>
+          <div class="ds-principle__desc">卡片 translateY(-4~-6px) + shadow，按鈕 translateY(-1px)，文字連結 underline 展開。統一的動態語彙。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <div class="ds-block__title">Hover Language — Live Demo</div>
+      <div class="ds-preview">
+        <div style="display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start">
+          <a href="#" class="project-card" onclick="return false" style="width:200px">
+            <div class="project-card__thumb" style="height:80px"><span class="thumb__placeholder" style="font-size:11px">Card · -6px</span></div>
+            <div class="project-card__body"><h3 class="project-card__title" style="font-size:15px">Project Card</h3></div>
+          </a>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <button class="btn">Button · -1px</button>
+            <span class="tag" style="cursor:default">Tag (no hover)</span>
+            <a href="#" onclick="return false" style="font-size:14px;font-weight:500;color:hsl(var(--foreground));position:relative;display:inline-block" class="navbar__links">
+              <span style="position:relative">Text Link — underline</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ACCESSIBILITY ═══ -->
+  <section class="ds-section" id="sec-a11y">
+    <h1 class="ds-section__title">Accessibility</h1>
+    <p class="ds-section__desc">無障礙設計是基本要求，不是加分項。以下規則所有元件均須遵守。</p>
+
+    <div class="ds-block">
+      <div class="ds-block__title">A11y Checklist</div>
+      <div class="ds-a11y-list">
+        <div class="ds-a11y-item">
+          <div class="ds-a11y-icon">F</div>
+          <div class="ds-a11y-content">
+            <strong>focus-visible 外框</strong>
+            <p><code style="font-family:'JetBrains Mono',monospace;font-size:11px">2px solid hsl(var(--ring))</code>，<code style="font-family:'JetBrains Mono',monospace;font-size:11px">outline-offset: 2px</code>。style.css 已全域套用，新元件無需再次定義。</p>
+          </div>
+        </div>
+        <div class="ds-a11y-item">
+          <div class="ds-a11y-icon">T</div>
+          <div class="ds-a11y-content">
+            <strong>最小觸控區域</strong>
+            <p>所有互動元素最小高度 / 寬度 <code style="font-family:'JetBrains Mono',monospace;font-size:11px">44px</code>。Hamburger 44×44px，Theme Toggle 38×38px（加上 padding 仍滿足）。</p>
+          </div>
+        </div>
+        <div class="ds-a11y-item">
+          <div class="ds-a11y-icon">A</div>
+          <div class="ds-a11y-content">
+            <strong>ARIA 標籤</strong>
+            <p>圖示按鈕需 <code style="font-family:'JetBrains Mono',monospace;font-size:11px">aria-label</code>，Theme Toggle 需 <code style="font-family:'JetBrains Mono',monospace;font-size:11px">aria-pressed</code>，active 頁面連結需 <code style="font-family:'JetBrains Mono',monospace;font-size:11px">aria-current="page"</code>。</p>
+          </div>
+        </div>
+        <div class="ds-a11y-item">
+          <div class="ds-a11y-icon">M</div>
+          <div class="ds-a11y-content">
+            <strong>prefers-reduced-motion</strong>
+            <p>style.css 已全域處理：偵測到設定後，所有 reveal 動畫與 transition 自動停用。scroll reveal 內容仍可見。</p>
+          </div>
+        </div>
+        <div class="ds-a11y-item">
+          <div class="ds-a11y-icon">C</div>
+          <div class="ds-a11y-content">
+            <strong>color-scheme 宣告</strong>
+            <p><code style="font-family:'JetBrains Mono',monospace;font-size:11px">color-scheme: light dark</code> 讓瀏覽器滾動條與原生表單元件自動跟隨主題，無需額外 CSS。</p>
+          </div>
+        </div>
+        <div class="ds-a11y-item">
+          <div class="ds-a11y-icon">H</div>
+          <div class="ds-a11y-content">
+            <strong>語義化標題層次</strong>
+            <p>每頁只有一個 <code style="font-family:'JetBrains Mono',monospace;font-size:11px">h1</code>，接著 h2 → h3 依序遞降，不跳級。Section 標籤（小大寫標題）使用 <code style="font-family:'JetBrains Mono',monospace;font-size:11px">p</code> 或 <code style="font-family:'JetBrains Mono',monospace;font-size:11px">span</code>，非標題標籤。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <div class="ds-block__title">Focus Ring Demo（Tab 鍵切換試試看）</div>
+      <div class="ds-focus-demo">
+        <a href="#" onclick="return false" class="btn" style="font-size:14px">Link Button</a>
+        <button class="theme-toggle" aria-label="Theme toggle demo">
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+        <input type="text" placeholder="Input field" style="padding:10px 16px;background-color:hsl(var(--input));border:1px solid hsl(var(--border));border-radius:calc(var(--radius)+4px);color:hsl(var(--foreground));font-family:'Noto Sans TC',sans-serif;font-size:14px;width:160px">
+        <button class="btn btn--outlined">Outlined</button>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <div class="ds-block__title">ARIA Patterns</div>
+      <div class="ds-do-dont">
+        <div class="ds-do">
+          <div class="ds-do__label">✓ 正確</div>
+          <code>&lt;button aria-label="切換主題"
+        aria-pressed="false"&gt;
+  &lt;svg aria-hidden="true"&gt;...&lt;/svg&gt;
+&lt;/button&gt;
+
+&lt;img src="..." alt="專案截圖描述"&gt;
+
+&lt;a href="/" aria-current="page"&gt;
+  Work
+&lt;/a&gt;</code>
+        </div>
+        <div class="ds-dont">
+          <div class="ds-dont__label">✗ 錯誤</div>
+          <code>&lt;button&gt;
+  &lt;svg&gt;...&lt;/svg&gt;
+&lt;/button&gt;
+&lt;!-- 無 aria-label --&gt;
+
+&lt;img src="..."&gt;
+&lt;!-- 無 alt 屬性 --&gt;
+
+&lt;div onclick="..."&gt;
+  可點擊區域
+&lt;/div&gt;
+&lt;!-- 用 div 模擬按鈕 --&gt;</code>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ BREAKPOINTS ═══ -->
+  <section class="ds-section" id="sec-breakpoints">
+    <h1 class="ds-section__title">Breakpoints</h1>
+    <p class="ds-section__desc">兩個主要斷點，Desktop-first（預設桌面，hand-crafted 覆寫 mobile）。</p>
+
+    <div class="ds-block">
+      <div class="ds-block__title">Breakpoint Map</div>
+      <div class="ds-bp-list">
+        <div class="ds-bp-row">
+          <div class="ds-bp-icon">🖥</div>
+          <div class="ds-bp-meta">
+            <strong>Desktop — Default (&gt; 768px)</strong>
+            <span>全功能佈局，TOC 在 &gt; 1199px 顯示</span>
+            <div class="ds-bp-changes">
+              <span class="ds-bp-chip">Navbar 橫向</span>
+              <span class="ds-bp-chip">Projects 2欄</span>
+              <span class="ds-bp-chip">Form 雙欄</span>
+              <span class="ds-bp-chip">Section 96px</span>
+              <span class="ds-bp-chip">TOC 顯示 (&gt;1199px)</span>
+            </div>
+          </div>
+        </div>
+        <div class="ds-bp-row">
+          <div class="ds-bp-icon">📱</div>
+          <div class="ds-bp-meta">
+            <strong>Mobile — ≤ 768px</strong>
+            <span>漢堡選單，單欄佈局</span>
+            <div class="ds-bp-changes">
+              <span class="ds-bp-chip">Hamburger 選單</span>
+              <span class="ds-bp-chip">Projects 單欄</span>
+              <span class="ds-bp-chip">Form 單欄</span>
+              <span class="ds-bp-chip">Stk/Results 單欄</span>
+              <span class="ds-bp-chip">Process 垂直</span>
+              <span class="ds-bp-chip">Btn 全寬</span>
+              <span class="ds-bp-chip">Section 64px</span>
+              <span class="ds-bp-chip">Hero pt 140px</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-block">
+      <div class="ds-block__title">Responsive Preview</div>
+      <div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap">
+        <button class="ds-motion-play" onclick="setPreviewWidth(375)">📱 375px</button>
+        <button class="ds-motion-play" onclick="setPreviewWidth(768)">💻 768px</button>
+        <button class="ds-motion-play" onclick="setPreviewWidth(1080)">🖥 1080px</button>
+        <button class="ds-motion-play" onclick="setPreviewWidth('100%')">↔ Full</button>
+      </div>
+      <div id="rwd-frame-wrap" style="overflow:auto;border:1px solid hsl(var(--border));border-radius:var(--radius);background:hsl(var(--muted))">
+        <iframe id="rwd-frame" src="index.html" style="width:100%;height:480px;border:none;display:block" title="Portfolio Preview"></iframe>
+      </div>
+      <div style="font-size:11px;color:hsl(var(--muted-foreground));margin-top:8px" id="rwd-label">Current width: 100%</div>
+    </div>
+  </section>
+
+  <!-- ═══ AI CHECKLIST ═══ -->
+  <section class="ds-section" id="sec-checklist">
+    <h1 class="ds-section__title">AI Checklist</h1>
+    <p class="ds-section__desc">每次 AI 修改完成後，逐一確認這些項目。點擊勾選，重新整理後重置。</p>
+
+    <div class="ds-block">
+      <div class="ds-block__title">新頁面建立</div>
+      <div class="ds-checklist" id="checklist-new"></div>
+    </div>
+
+    <div class="ds-block">
+      <div class="ds-block__title">修改現有頁面</div>
+      <div class="ds-checklist" id="checklist-edit"></div>
+    </div>
+
+    <div class="ds-block">
+      <div class="ds-block__title">Token 使用規則（快速參照）</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div style="padding:14px 16px;background-color:hsl(var(--background));border:1px solid hsl(var(--border));border-radius:var(--radius)">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:hsl(var(--muted-foreground));margin-bottom:10px">背景</div>
+          <div style="font-size:12px;line-height:2;font-family:'JetBrains Mono',monospace;color:hsl(var(--foreground))">
+            頁面底色 → <span style="color:hsl(var(--primary))">--background</span><br>
+            卡片/浮層 → <span style="color:hsl(var(--primary))">--card</span><br>
+            次要背景 → <span style="color:hsl(var(--primary))">--muted</span><br>
+            表單輸入 → <span style="color:hsl(var(--primary))">--input</span>
+          </div>
+        </div>
+        <div style="padding:14px 16px;background-color:hsl(var(--background));border:1px solid hsl(var(--border));border-radius:var(--radius)">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:hsl(var(--muted-foreground));margin-bottom:10px">文字</div>
+          <div style="font-size:12px;line-height:2;font-family:'JetBrains Mono',monospace;color:hsl(var(--foreground))">
+            主要內文 → <span style="color:hsl(var(--primary))">--foreground</span><br>
+            次要說明 → <span style="color:hsl(var(--primary))">--muted-fg</span><br>
+            強調/連結 → <span style="color:hsl(var(--primary))">--primary</span><br>
+            卡片文字 → <span style="color:hsl(var(--primary))">--card-fg</span>
+          </div>
+        </div>
+        <div style="padding:14px 16px;background-color:hsl(var(--background));border:1px solid hsl(var(--border));border-radius:var(--radius)">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:hsl(var(--muted-foreground));margin-bottom:10px">邊框 / 強調</div>
+          <div style="font-size:12px;line-height:2;font-family:'JetBrains Mono',monospace;color:hsl(var(--foreground))">
+            所有邊框 → <span style="color:hsl(var(--primary))">--border</span><br>
+            主色強調 → <span style="color:hsl(var(--primary))">--primary</span><br>
+            軟背景 → <span style="color:hsl(var(--primary))">var(--accent)</span><br>
+            Focus → <span style="color:hsl(var(--primary))">--ring</span>
+          </div>
+        </div>
+        <div style="padding:14px 16px;background-color:hsl(var(--background));border:1px solid hsl(var(--border));border-radius:var(--radius)">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:hsl(var(--muted-foreground));margin-bottom:10px">陰影</div>
+          <div style="font-size:12px;line-height:2;font-family:'JetBrains Mono',monospace;color:hsl(var(--foreground))">
+            細微層次 → <span style="color:hsl(var(--primary))">--shadow-sm</span><br>
+            Hover card → <span style="color:hsl(var(--primary))">--shadow-md</span><br>
+            強調浮起 → <span style="color:hsl(var(--primary))">--shadow-lg</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+</div>
+
+<script>
+(function(){
+'use strict';
+
+// ── Theme ──
+var root = document.documentElement;
+root.classList.add('js');
+var toggleBtns = document.querySelectorAll('[data-theme-toggle]');
+
+function syncPressed(isDark){
+  toggleBtns.forEach(function(b){b.setAttribute('aria-pressed',isDark?'true':'false')});
+}
+syncPressed(root.classList.contains('dark'));
+
+function toggleTheme(){
+  var next = root.classList.contains('dark') ? 'light' : 'dark';
+  root.classList.toggle('dark', next==='dark');
+  syncPressed(next==='dark');
+  try{localStorage.setItem('theme',next)}catch(e){}
+  buildLiveSwatches();
+}
+toggleBtns.forEach(function(b){b.addEventListener('click',toggleTheme)});
+
+// ── Nav ──
+var navItems = document.querySelectorAll('.ds-nav__item');
+var sections = document.querySelectorAll('.ds-section');
+var pageTitle = document.getElementById('dsPageTitle');
+var pageBadge = document.getElementById('dsPageBadge');
+
+var badgeMap = {
+  colors:'Foundations', typography:'Foundations', spacing:'Foundations',
+  radius:'Foundations', motion:'Foundations', components:'Components',
+  principles:'Guidelines', a11y:'Guidelines', breakpoints:'Guidelines', checklist:'Guidelines'
+};
+
+navItems.forEach(function(item){
+  item.addEventListener('click',function(){
+    var target = item.dataset.target;
+    navItems.forEach(function(i){i.classList.remove('is-active')});
+    item.classList.add('is-active');
+    sections.forEach(function(s){s.classList.remove('is-active')});
+    var sec = document.getElementById('sec-'+target);
+    if(sec) sec.classList.add('is-active');
+    pageTitle.textContent = item.textContent.trim();
+    pageBadge.textContent = badgeMap[target]||'';
+    closeSidebar();
+    window.scrollTo(0,0);
+  });
+});
+
+// ── Mobile sidebar ──
+var sidebar = document.getElementById('dsSidebar');
+var overlay = document.getElementById('dsOverlay');
+var menuBtn = document.getElementById('dsMenuBtn');
+function openSidebar(){sidebar.classList.add('is-open');overlay.classList.add('is-open')}
+function closeSidebar(){sidebar.classList.remove('is-open');overlay.classList.remove('is-open')}
+menuBtn.addEventListener('click',openSidebar);
+overlay.addEventListener('click',closeSidebar);
+
+// ── Toast ──
+var toast = document.getElementById('dsToast');
+function showToast(msg){
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(function(){toast.classList.remove('show')},1800);
+}
+
+// ── HSL → Hex ──
+function hslToHex(h, s, l) {
+  s /= 100; l /= 100;
+  var a = s * Math.min(l, 1 - l);
+  function f(n) {
+    var k = (n + h / 30) % 12;
+    var c = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+    return Math.round(255 * c).toString(16).padStart(2, '0');
+  }
+  return '#' + f(0) + f(8) + f(4);
+}
+
+function parseHsl(str){
+  var p = str.trim().split(/\s+/);
+  if(p.length < 3) return null;
+  return {h:parseFloat(p[0]),s:parseFloat(p[1]),l:parseFloat(p[2])};
+}
+
+// ── Swatch builder ──
+function makeSwatch(name, bgValue, isHsl, copyText){
+  var wrap = document.createElement('div');
+  wrap.className = 'ds-swatch';
+  wrap.title = 'Copy: ' + (copyText||bgValue);
+
+  var color = document.createElement('div');
+  color.className = 'ds-swatch__color';
+  color.style.backgroundColor = isHsl ? 'hsl('+bgValue+')' : bgValue;
+
+  var hint = document.createElement('div');
+  hint.className = 'ds-swatch__copy-hint';
+  hint.textContent = 'Copy';
+  color.appendChild(hint);
+
+  var label = document.createElement('div');
+  label.className = 'ds-swatch__label';
+
+  var hexStr = '';
+  if(isHsl){
+    var parsed = parseHsl(bgValue);
+    if(parsed) hexStr = hslToHex(parsed.h, parsed.s, parsed.l);
+  }
+
+  label.innerHTML =
+    '<span class="ds-swatch__name">'+name+'</span>' +
+    (hexStr ? '<span class="ds-swatch__hex">'+hexStr+'</span>' : '');
+
+  wrap.appendChild(color);
+  wrap.appendChild(label);
+
+  wrap.addEventListener('click',function(){
+    var toCopy = copyText || (isHsl ? 'hsl('+bgValue+')' : bgValue);
+    try{
+      navigator.clipboard.writeText(toCopy).then(function(){
+        showToast('已複製 ' + name);
+      });
+    }catch(e){showToast('複製失敗')}
+  });
+
+  return wrap;
+}
+
+// ── Token data ──
+var lightTokens = [
+  {name:'background',  hsl:'37 36% 94%'},
+  {name:'foreground',  hsl:'240 28% 14%'},
+  {name:'card',        hsl:'0 0% 100%'},
+  {name:'muted',       hsl:'40 27% 89%'},
+  {name:'muted-fg',    hsl:'60 3% 52%'},
+  {name:'border',      hsl:'37 26% 83%'},
+  {name:'input',       hsl:'40 20% 90%'},
+  {name:'primary',     hsl:'20 65% 47%'},
+  {name:'primary-fg',  hsl:'0 0% 100%'},
+  {name:'ring',        hsl:'20 65% 47%'},
+];
+
+var darkTokens = [
+  {name:'background',  hsl:'240 10% 8%'},
+  {name:'foreground',  hsl:'37 30% 94%'},
+  {name:'card',        hsl:'240 8% 12%'},
+  {name:'muted',       hsl:'240 6% 16%'},
+  {name:'muted-fg',    hsl:'240 5% 65%'},
+  {name:'border',      hsl:'240 6% 20%'},
+  {name:'input',       hsl:'240 6% 16%'},
+  {name:'primary',     hsl:'20 80% 60%'},
+  {name:'primary-fg',  hsl:'240 10% 8%'},
+  {name:'ring',        hsl:'20 80% 60%'},
+];
+
+var liveTokens = [
+  {name:'--background',   cssVar:'var(--background)', copy:'hsl(var(--background))'},
+  {name:'--foreground',   cssVar:'var(--foreground)', copy:'hsl(var(--foreground))'},
+  {name:'--card',         cssVar:'var(--card)', copy:'hsl(var(--card))'},
+  {name:'--muted',        cssVar:'var(--muted)', copy:'hsl(var(--muted))'},
+  {name:'--muted-fg',     cssVar:'var(--muted-foreground)', copy:'hsl(var(--muted-foreground))'},
+  {name:'--border',       cssVar:'var(--border)', copy:'hsl(var(--border))'},
+  {name:'--primary',      cssVar:'var(--primary)', copy:'hsl(var(--primary))'},
+  {name:'--primary-fg',   cssVar:'var(--primary-foreground)', copy:'hsl(var(--primary-foreground))'},
+  {name:'--accent',       cssVar:null, copy:'var(--accent)'},
+];
+
+function buildStaticSwatches(containerId, tokens){
+  var c = document.getElementById(containerId);
+  if(!c) return;
+  c.innerHTML = '';
+  tokens.forEach(function(t){
+    c.appendChild(makeSwatch(t.name, t.hsl, true, 'hsl('+t.hsl+')'));
+  });
+}
+
+function buildLiveSwatches(){
+  var c = document.getElementById('swatchesLive');
+  if(!c) return;
+  c.innerHTML = '';
+  liveTokens.forEach(function(t){
+    var wrap = document.createElement('div');
+    wrap.className = 'ds-swatch';
+    wrap.title = 'Copy: ' + t.copy;
+
+    var color = document.createElement('div');
+    color.className = 'ds-swatch__color';
+    if(t.cssVar){
+      color.style.backgroundColor = 'hsl('+t.cssVar+')';
+    } else {
+      color.style.backgroundColor = 'var(--accent)';
+    }
+
+    var hint = document.createElement('div');
+    hint.className = 'ds-swatch__copy-hint';
+    hint.textContent = 'Copy';
+    color.appendChild(hint);
+
+    var label = document.createElement('div');
+    label.className = 'ds-swatch__label';
+    label.innerHTML = '<span class="ds-swatch__name">'+t.name+'</span>';
+    wrap.appendChild(color);
+    wrap.appendChild(label);
+
+    wrap.addEventListener('click',function(){
+      try{
+        navigator.clipboard.writeText(t.copy).then(function(){
+          showToast('已複製 '+t.name);
+        });
+      }catch(e){}
+    });
+
+    c.appendChild(wrap);
+  });
+}
+
+buildStaticSwatches('swatchesLight', lightTokens);
+buildStaticSwatches('swatchesDark', darkTokens);
+buildLiveSwatches();
+
+// ── Spacing ──
+var spacings = [
+  {val:4,  label:'4px',  desc:'--space-1 · Tag padding vertical'},
+  {val:8,  label:'8px',  desc:'--space-2 · Form label gap'},
+  {val:12, label:'12px', desc:'--space-3 · Tag padding horizontal'},
+  {val:16, label:'16px', desc:'--space-4 · Form grid gap'},
+  {val:20, label:'20px', desc:'--space-5 · Card body · Form group gap'},
+  {val:24, label:'24px', desc:'--space-5 · Container padding · Card body'},
+  {val:32, label:'32px', desc:'--space-6 · Nav link gap · Grid gap'},
+  {val:48, label:'48px', desc:'--space-7 · Section title margin · Footer'},
+  {val:64, label:'64px', desc:'--space-8 · Navbar height · Section (mobile)'},
+  {val:96, label:'96px', desc:'--space-9 · Section padding (desktop)'},
+];
+
+var spacingList = document.getElementById('spacingList');
+spacings.forEach(function(s){
+  var row = document.createElement('div');
+  row.className = 'ds-spacing-row';
+  row.innerHTML =
+    '<div class="ds-spacing-label">'+s.label+'</div>'+
+    '<div class="ds-spacing-bar" style="width:'+Math.min(s.val*2.8,540)+'px"></div>'+
+    '<div class="ds-spacing-desc">'+s.desc+'</div>';
+  spacingList.appendChild(row);
+});
+
+// ── Motion play ──
+window.playMotion = function(id, easing, dur){
+  var dot = document.getElementById('dot-'+id);
+  var track = document.getElementById('track-'+id);
+  if(!dot || !track) return;
+  var trackW = track.offsetWidth - 40;
+  dot.style.transition = 'none';
+  dot.style.left = '8px';
+  requestAnimationFrame(function(){
+    requestAnimationFrame(function(){
+      dot.style.transition = 'left '+dur+' '+easing;
+      dot.style.left = trackW+'px';
+      setTimeout(function(){
+        dot.style.transition = 'left '+dur+' '+easing;
+        dot.style.left = '8px';
+      }, parseFloat(dur)*1000 + 80);
+    });
+  });
+};
+
+// ── Reveal demo ──
+var revealDemo = document.getElementById('reveal-demo');
+if(revealDemo){
+  [1,2,3,4,5,6].forEach(function(i){
+    var box = document.createElement('div');
+    box.id = 'reveal-box-'+i;
+    var opacity = (0.25 + i*0.13).toFixed(2);
+    box.style.cssText = 'width:32px;height:'+(16+i*9)+'px;background-color:hsl(var(--primary)/'+opacity+');border-radius:4px;opacity:0;transform:translateY(12px);transition:opacity .7s cubic-bezier(.22,1,.36,1) '+(i*.08)+'s,transform .7s cubic-bezier(.22,1,.36,1) '+(i*.08)+'s';
+    revealDemo.appendChild(box);
+  });
+}
+
+window.playReveal = function(){
+  for(var i=1;i<=6;i++){
+    (function(idx){
+      var box = document.getElementById('reveal-box-'+idx);
+      if(!box) return;
+      box.style.opacity = '0';
+      box.style.transform = 'translateY(12px)';
+      setTimeout(function(){
+        box.style.opacity = '1';
+        box.style.transform = 'translateY(0)';
+        setTimeout(function(){
+          box.style.opacity = '0';
+          box.style.transform = 'translateY(12px)';
+        }, 1600);
+      }, 60);
+    })(i);
+  }
+};
+
+// ── Duration reference ──
+var durRef = document.getElementById('dur-ref');
+if(durRef){
+  [{label:'0.2s',desc:'顏色 / 邊框 hover'},{label:'0.3s',desc:'主題切換 / Card transform'},{label:'0.4s',desc:'圖片縮放 / Icon 旋轉'},{label:'0.7s',desc:'Scroll Reveal 入場'}].forEach(function(d){
+    var item = document.createElement('div');
+    item.style.cssText = 'display:flex;flex-direction:column;align-items:center;gap:6px;';
+    var bar = document.createElement('div');
+    bar.style.cssText = 'height:8px;border-radius:4px;background-color:hsl(var(--primary)/0.5);width:'+Math.round(parseFloat(d.label)*140)+'px;min-width:28px';
+    var meta = document.createElement('div');
+    meta.style.cssText = 'font-size:11px;text-align:center;color:hsl(var(--muted-foreground))';
+    meta.innerHTML = '<strong style="color:hsl(var(--foreground));display:block;font-family:JetBrains Mono,monospace">'+d.label+'</strong>'+d.desc;
+    item.appendChild(bar);
+    item.appendChild(meta);
+    durRef.appendChild(item);
+  });
+}
+
+// ── RWD iframe ──
+window.setPreviewWidth = function(w){
+  var frame = document.getElementById('rwd-frame');
+  var label = document.getElementById('rwd-label');
+  var wrap = document.getElementById('rwd-frame-wrap');
+  if(w==='100%'){
+    frame.style.width = '100%';
+    wrap.style.overflowX = 'hidden';
+    if(label) label.textContent = 'Current width: 100%';
+  } else {
+    frame.style.width = w+'px';
+    wrap.style.overflowX = w > wrap.offsetWidth ? 'auto' : 'hidden';
+    if(label) label.textContent = 'Current width: '+w+'px';
+  }
+};
+
+// ── Checklists ──
+var newChecks = [
+  'html lang="zh-Hant" 語言屬性',
+  '主題初始化 script（inline，避免 FOUC）',
+  '引入 style.css',
+  '引入 main.js（defer 或底部）',
+  'Navbar 結構正確，含 .theme-toggle',
+  'Hero section padding-top: 180px（手機 140px）',
+  '所有圖片有 alt 屬性',
+  '新元件支援 Light / Dark 雙主題',
+  '滾動進場元素加 .reveal + data-delay',
+  '長篇內文使用 max-width: 640–720px',
+  'Footer 統一格式',
+];
+
+var editChecks = [
+  '未硬寫任何顏色值（hex / rgb）',
+  '未引入新字體',
+  '新元件視覺風格與現有一致',
+  'hover 動畫使用相同緩動函數',
+  '手機斷點 ≤ 768px 已確認',
+  'Dark mode 外觀正確',
+  '沒有破壞現有 CSS cascade',
+  '主色仍為 Hue 20 橙棕色系',
+];
+
+function buildChecklist(containerId, items){
+  var c = document.getElementById(containerId);
+  if(!c) return;
+  items.forEach(function(text, i){
+    var item = document.createElement('div');
+    item.className = 'ds-check-item';
+    var box = document.createElement('div');
+    box.className = 'ds-check-item__box';
+    box.innerHTML = '';
+    var label = document.createElement('span');
+    label.className = 'ds-check-item__text';
+    label.textContent = text;
+    item.appendChild(box);
+    item.appendChild(label);
+    item.addEventListener('click',function(){
+      item.classList.toggle('checked');
+      box.innerHTML = item.classList.contains('checked')
+        ? '<svg width="10" height="10" viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9.5 10.5,2.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+        : '';
+    });
+    c.appendChild(item);
+  });
+}
+
+buildChecklist('checklist-new', newChecks);
+buildChecklist('checklist-edit', editChecks);
+
+})();
+</script>
+</body>
+</html>
