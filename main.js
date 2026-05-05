@@ -101,17 +101,17 @@
     var lbImg = lb.querySelector('.lightbox__img');
     var lbClose = lb.querySelector('.lightbox__close');
 
-    function openLightbox(src, alt) {
+    var openLightbox = function (src, alt) {
       lbImg.src = src;
       lbImg.alt = alt || '';
       lb.classList.add('is-open');
       document.body.style.overflow = 'hidden';
-    }
+    };
 
-    function closeLightbox() {
+    var closeLightbox = function () {
       lb.classList.remove('is-open');
       document.body.style.overflow = '';
-    }
+    };
 
     lightboxImgs.forEach(function (img) {
       img.addEventListener('click', function () {
