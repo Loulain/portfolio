@@ -117,11 +117,12 @@
       <!-- 背景與問題 -->
       <h2 id="background">背景與問題</h2>
       <p>產品在快速迭代的早期階段，累積了大量沒有統一規範的設計債——同一個元件在不同頁面存在不同的樣式、不同的命名或是狀態缺漏，導致工程師很難直接套用，每次開發都會發生重工或需要大量的溝通成本。</p>
-      <p>起初這個問題是由工程師主動反映給我，讓我意識到產品已經進入下一個階段：「規格化」，這將會影響整個團隊的開發效率。我與主管討論過後，決定將「元件庫優化」列為設計團隊的 OKR，與績效掛鈎，爭取半年的時間來有效地解決這個問題。</p>
+      <p>起初這個問題是工程師向我反映，這讓我意識到產品設計上不能只是一昧追求快速，「規格化」顯得越來越重要，這將會影響整個團隊的開發效率。</p>
+      <p>在我與主管討論過後，決定為品牌建立一個完整的「元件庫」，並將這個目標與績效掛鈎，用半年的時間來解決這個問題。</p>
 
       <figure>
         <div class="image-block">
-          <span class="image-block__placeholder">元件庫優化前的混亂狀態截圖</span>
+          <img src="../images/project-1-01.jpg" alt="元件庫優化前的混亂狀態">
         </div>
       </figure>
 
@@ -130,11 +131,10 @@
       <p>這個計畫從提案、規劃到執行都由我主導推動，具體包含：</p>
       <ul>
         <li>識別工程師痛點，主動提案並將此列入團隊 OKR</li>
-        <li>研究 Atlassian、Ant Design、Material Design 等成熟設計系統，定義本次優化範疇</li>
+        <li>研究 Atlassian、Ant Design、Material Design 等成熟設計系統，定義優化範疇</li>
         <li>盤點並整理 34 個高頻元件，建立統一的樣式、命名與邏輯規範</li>
         <li>制定 Design Token 命名架構，確保設計端與工程端能直接對應</li>
-        <li>規劃「大包小」的分階段導入策略，在不影響既有功能的前提下滾動式更新</li>
-        <li>建立元件迭代流程，避免日後再度累積設計債</li>
+        <li>規劃分階段導入策略，在不影響既有功能的前提下滾動式更新</li>
       </ul>
 
       <!-- 設計過程 -->
@@ -142,21 +142,27 @@
 
       <!-- 1. 釐清需求 -->
       <h3>1. 釐清需求，縮小範疇</h3>
-      <p>在動手之前，我先訪談了三個最重要的關係人——App 設計師、工程師、PM——了解他們各自對元件庫的期待。整理後發現三方的需求分別落在：<strong>樣式統一、狀態完整、使用說明清楚</strong>。</p>
+      <p>在動手之前，我先訪談了三個最重要的關係人：App 設計師、工程師、PM，想要了解他們各自對元件庫的期待。整理後發現三方的需求分別落在：<strong>樣式統一、狀態完整、使用說明清楚</strong>。</p>
 
       <div class="stakeholder-grid">
         <div class="stakeholder-card">
-          <div class="stakeholder-card__icon">APP</div>
+          <div class="stakeholder-card__icon">
+            <img src="../images/project-1-07.jpg" alt="APP 設計師">
+          </div>
           <div class="stakeholder-card__role">APP 設計師</div>
           <p class="stakeholder-card__quote">希望不同裝置下元件樣式能統一。</p>
         </div>
         <div class="stakeholder-card">
-          <div class="stakeholder-card__icon">DEV</div>
+          <div class="stakeholder-card__icon">
+            <img src="../images/project-1-08.jpg" alt="工程師">
+          </div>
           <div class="stakeholder-card__role">工程師</div>
           <p class="stakeholder-card__quote">希望元件能重複使用，並能掌握所有狀態。</p>
         </div>
         <div class="stakeholder-card">
-          <div class="stakeholder-card__icon">PM</div>
+          <div class="stakeholder-card__icon">
+            <img src="../images/project-1-09.jpg" alt="專案經理">
+          </div>
           <div class="stakeholder-card__role">專案經理</div>
           <p class="stakeholder-card__quote">希望能清楚知道元件如何使用、何時使用。</p>
         </div>
@@ -166,7 +172,7 @@
 
       <figure>
         <div class="image-block">
-          <span class="image-block__placeholder">參考過的設計系統 Logo</span>
+          <img src="../images/project-1-02.jpg" alt="參考過的設計系統">
         </div>
       </figure>
 
@@ -176,7 +182,7 @@
 
       <figure>
         <div class="image-block">
-          <span class="image-block__placeholder">元件盤點表格截圖（Google Sheet）</span>
+          <img src="../images/project-1-03.jpg" alt="元件盤點表格截圖">
         </div>
       </figure>
 
@@ -187,21 +193,21 @@
       <p><strong>樣式整合：</strong>統一相同元件在不同頁面的視覺樣式。</p>
       <figure>
         <div class="image-block">
-          <span class="image-block__placeholder">樣式整合 Before / After</span>
+          <img src="../images/project-1-04.jpg" alt="樣式整合 Before / After">
         </div>
       </figure>
 
       <p><strong>命名整合：</strong>建立一套能直接對應工程師使用的 Design Token 命名系統，讓設計與開發說同一種語言。</p>
       <figure>
         <div class="image-block">
-          <span class="image-block__placeholder">命名整合 Before / After</span>
+          <img src="../images/project-1-05.jpg" alt="命名整合 Before / After">
         </div>
       </figure>
 
       <p><strong>邏輯整合：</strong>統一元件的動畫時間、運動方向、狀態變化等互動細節。</p>
       <figure>
         <div class="image-block">
-          <span class="image-block__placeholder">邏輯整合 Before / After</span>
+          <img src="../images/project-1-06.jpg" alt="邏輯整合 Before / After">
         </div>
       </figure>
 

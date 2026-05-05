@@ -87,6 +87,47 @@
     });
   }
 
+  // ===== Lightbox =====
+  var lightboxImgs = document.querySelectorAll('.image-block img');
+  if (lightboxImgs.length) {
+    var lb = document.createElement('div');
+    lb.className = 'lightbox';
+    lb.setAttribute('role', 'dialog');
+    lb.setAttribute('aria-modal', 'true');
+    lb.setAttribute('aria-label', '放大圖片');
+    lb.innerHTML = '<button class="lightbox__close" aria-label="關閉">&#x2715;</button><img class="lightbox__img" src="" alt="">';
+    document.body.appendChild(lb);
+
+    var lbImg = lb.querySelector('.lightbox__img');
+    var lbClose = lb.querySelector('.lightbox__close');
+
+    function openLightbox(src, alt) {
+      lbImg.src = src;
+      lbImg.alt = alt || '';
+      lb.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lb.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    lightboxImgs.forEach(function (img) {
+      img.addEventListener('click', function () {
+        openLightbox(img.src, img.alt);
+      });
+    });
+
+    lb.addEventListener('click', function (e) {
+      if (e.target === lb || e.target === lbClose) closeLightbox();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && lb.classList.contains('is-open')) closeLightbox();
+    });
+  }
+
   // ===== TOC Scroll Spy =====
   var tocHeadings = document.querySelectorAll('.project-content h2[id]');
   if (tocHeadings.length && 'IntersectionObserver' in window) {
